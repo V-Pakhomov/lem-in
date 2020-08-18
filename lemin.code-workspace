@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "lemin",
+			"path": "."
+		},
+		{
+			"name": "libft",
+			"path": "../push_swap/libft"
+		}
+	],
+	"settings": {}
+}
