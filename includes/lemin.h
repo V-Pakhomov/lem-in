@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/25 18:46:25 by rciera           ###   ########.fr       */
+/*   Updated: 2020/08/25 19:03:35 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,14 @@
 # include "../libft/libft.h"
 # include "ft_queue.h"
 
+typedef struct	s_path
+{
+	int				ants;
+	int				len;
+	int				*path;
+	struct s_path	*next;
+}				t_path;
+
 typedef struct	s_lemin
 {
 	int		ants_num;
@@ -24,6 +32,8 @@ typedef struct	s_lemin
 	int		**adj_matrix;
 	int		*used;
 	int		*parent;
+	int		*path_len;
+	t_path	*path;
 }				t_lemin;
 
 #endif
