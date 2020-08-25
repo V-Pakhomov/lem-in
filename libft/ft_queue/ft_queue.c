@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 21:47:41 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/08 22:11:10 by rciera           ###   ########.fr       */
+/*   Updated: 2020/08/25 15:52:01 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ long long back_queue(t_queue **q)
 	return ((*q)->prev->num);
 }
 
-int empty_queue(t_queue **q)
+int empty_queue(t_queue *q)
 {
-	return (*q == NULL);
+	return (q == NULL);
 }

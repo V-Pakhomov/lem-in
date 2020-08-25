@@ -6,13 +6,16 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:21:46 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/25 15:36:13 by rciera           ###   ########.fr       */
+/*   Updated: 2020/08/25 15:49:32 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/lemin.h"
 
-void bfs(t_lemin *lemin)
+void bfs(t_lemin *lemin, int vert)
 {
+	t_queue *queue;
+
+	queue = NULL;
 	
 }
