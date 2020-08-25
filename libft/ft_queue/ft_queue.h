@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bin_search.c                                       :+:      :+:    :+:   */
+/*   ft_queue.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/21 13:53:13 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/25 15:25:04 by rciera           ###   ########.fr       */
+/*   Created: 2020/08/08 21:45:28 by rciera            #+#    #+#             */
+/*   Updated: 2020/08/25 14:58:09 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lemin.h"
+#ifndef FT_QUEUE_H
+# define FT_QUEUE_H
 
-int room_num(char **rooms, int size, char *key)
+typedef struct	s_queue
 {
-	int l;
-	int m;
-	int r;
+	long long		num;
+	struct s_queue	*next;
+	struct s_queue	*prev;
+}				t_queue;
 
-	l = 0;
-	r = size;
-	while (r - l > 1)
-	{
-		m = (r + l) / 2;
-		if (ft_strcmp(rooms[m], key) <= 0)
-			l = m;
-		else
-			r = m;
-	}
-	return (l);
-}
+void			push_queue(t_queue **q, long long n);
+void			pop_queue(t_queue **q);
+long long		front_queue(t_queue **q);
+long long		back_queue(t_queue **q);
+int				empty_queue(t_queue **q);
+
+#endif

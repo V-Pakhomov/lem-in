@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bin_search.c                                       :+:      :+:    :+:   */
+/*   lemin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/21 13:53:13 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/25 15:25:04 by rciera           ###   ########.fr       */
+/*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
+/*   Updated: 2020/08/25 15:36:56 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/lemin.h"
+#ifndef LEMIN_H
+# define LEMIN_H
 
-int room_num(char **rooms, int size, char *key)
+# include "../libft/libft.h"
+
+typedef struct s_lemin
 {
-	int l;
-	int m;
-	int r;
+	int ants_num;
+	int rooms_num;
+	char **rooms;
+	int **adj_matrix;
+	int *used;
+}t_lemin;
 
-	l = 0;
-	r = size;
-	while (r - l > 1)
-	{
-		m = (r + l) / 2;
-		if (ft_strcmp(rooms[m], key) <= 0)
-			l = m;
-		else
-			r = m;
-	}
-	return (l);
-}
+#endif
