@@ -1,4 +1,4 @@
-#include "../libft/libft.h"
+#include "lemin.h"
 #include "input.h"
 
 int is_comment(char *s)

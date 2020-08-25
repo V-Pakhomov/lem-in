@@ -1,4 +1,4 @@
-#include "../libft/libft.h"
+#include "lemin.h"
 #include "input.h"
 
 void print_matrix(int **m, int size)

@@ -6,16 +6,18 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:41:51 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/21 14:05:47 by rciera           ###   ########.fr       */
+/*   Updated: 2020/08/25 17:38:30 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "lemin.h"
+
 void recoursive(char ***rooms, int left, int right, int arr_size)
 {
-	char **m;
+	char *m;
 	int l;
 	int r;
-	char **tmp;
+	char *tmp;
 
 	if (left >= right)
 		return;
@@ -41,7 +43,7 @@ void recoursive(char ***rooms, int left, int right, int arr_size)
 	recoursive(rooms, l, right, arr_size);
 }
 
-void qsort(char ***rooms, int arr_size)
+void ft_qsort(char ***rooms, int arr_size)
 {
 	recoursive(rooms, 0, arr_size - 1, arr_size);
 }

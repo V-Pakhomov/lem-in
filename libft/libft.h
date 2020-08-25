@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/03 18:26:04 by vinograd          #+#    #+#             */
-/*   Updated: 2020/08/25 15:53:23 by rciera           ###   ########.fr       */
+/*   Updated: 2020/08/25 17:46:44 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 # include <fcntl.h>
 # include <stdarg.h>
 # include <wchar.h>
-# include "ft_queue/ft_queue.h"
 # define FD_LIMIT 8192
 
 typedef struct	s_list
