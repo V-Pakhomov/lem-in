@@ -6,44 +6,44 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:41:51 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/25 17:38:30 by rciera           ###   ########.fr       */
+/*   Updated: 2020/08/25 19:11:50 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-void recoursive(char ***rooms, int left, int right, int arr_size)
+static void recoursive(t_lemin *lemin, int left, int right)
 {
-	char *m;
 	int l;
 	int r;
+	char *m;
 	char *tmp;
 
 	if (left >= right)
 		return;
-	m = (*rooms)[(left + right) / 2];
+	m = lemin->rooms[(left + right) / 2];
 	l = left;
 	r = right;
 	while (r > l)
 	{
-		while (ft_strcmp((*rooms)[l], m) < 0)
+		while (ft_strcmp(lemin->rooms[l], m) < 0)
 			l++;
-		while (ft_strcmp((*rooms)[r], m) > 0)
+		while (ft_strcmp(lemin->rooms[r], m) > 0)
 			r--;
 		if (r >= l)
 		{
-			tmp = (*rooms)[l];
-			(*rooms)[l] = (*rooms)[r];
-			(*rooms)[r] = tmp;
+			tmp = lemin->rooms[l];
+			lemin->rooms[l] = lemin->rooms[r];
+			lemin->rooms[r] = tmp;
 			l++;
 			r--;
 		}
 	}
-	recoursive(rooms, left, r, arr_size);
-	recoursive(rooms, l, right, arr_size);
+	recoursive(lemin, left, r);
+	recoursive(lemin, l, right);
 }
 
-void ft_qsort(char ***rooms, int arr_size)
+void ft_qsort(t_lemin *lemin)
 {
-	recoursive(rooms, 0, arr_size - 1, arr_size);
+	recoursive(lemin, 0, lemin->vertices - 1);
 }

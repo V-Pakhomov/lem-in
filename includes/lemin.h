@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/25 19:03:35 by rciera           ###   ########.fr       */
+/*   Updated: 2020/08/25 19:15:44 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,15 @@ typedef struct	s_lemin
 	int		*path_len;
 	t_path	*path;
 }				t_lemin;
+
+/*
+** qsort.c
+*/
+void			ft_qsort(t_lemin *lemin);
+
+/*
+** bin_search
+*/
+int				room_num(t_lemin *lemin, char *key);
 
 #endif
