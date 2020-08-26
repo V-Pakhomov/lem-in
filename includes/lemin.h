@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/25 19:15:44 by rciera           ###   ########.fr       */
+/*   Updated: 2020/08/26 17:07:41 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,17 @@ typedef struct	s_path
 
 typedef struct	s_lemin
 {
-	int		ants_num;
+	int		start;
+	int		end;
+	int		ants;
 	int		vertices;
 	char	**rooms;
 	int		**adj_matrix;
 	int		*used;
 	int		*parent;
 	int		*path_len;
+	int		max_path_len;
+	int 	num_of_paths;
 	t_path	*path;
 }				t_lemin;
 
@@ -45,5 +49,20 @@ void			ft_qsort(t_lemin *lemin);
 ** bin_search
 */
 int				room_num(t_lemin *lemin, char *key);
+
+/*
+** 	error.c
+*/
+void			error_exit(void);
+
+/*
+** t_path_functions.c
+*/
+void			push_path(t_lemin *lemin, t_path *new);
+
+/*
+** bfs.c
+*/
+void			bfs(t_lemin *lemin);
 
 #endif
