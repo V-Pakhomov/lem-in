@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:15:14 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/26 17:06:32 by rciera           ###   ########.fr       */
+/*   Updated: 2020/08/27 23:15:30 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ int find_paths(t_lemin *lemin)
 	reset_arrays_for_bfs(lemin);
 	bfs(lemin);
 	if (!lemin->used[lemin->end] ||
-		lemin->max_path_len - lemin->path_len[lemin->end] < 2 ||
-		lemin->num_of_paths >= lemin->ants)
+		lemin->max_path_len - lemin->path_len[lemin->end] < 2)
 		return ;
 	
 }
