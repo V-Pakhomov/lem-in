@@ -67,26 +67,52 @@ void add_room(t_room **all_lst, char *name)
 {
 	t_room *new;
 
-	if (all_lst != NULL)
+	if (*all_lst != NULL)
 	{
 		new = new_room(name);
 		new->next = *all_lst;
 		*all_lst = new;
 	}
 	else
-		new = new_room(name);
+		*all_lst = new_room(name);
 }
 
 void add_link(t_link **all_lst, char *first, char *last)
 {
 	t_link *new;
 
-	if (all_lst != NULL)
+	if (*all_lst != NULL)
 	{
 		new = new_link(first, last);
 		new->next = *all_lst;
 		*all_lst = new;
 	}
 	else
-		new = new_link(first, last);
+		*all_lst = new_link(first, last);
+}
+
+char **init_room_names_dict(t_room *rooms, int size)
+{
+	int i;
+	char **output;
+	t_room *pointer;
+
+	output = 0;
+	pointer = rooms;;
+
+	size++;
+
+	output = (char **)malloc(sizeof(char *) * (size + 1));
+
+	output[0] = ft_strdup("0");
+	i = 1;
+	while(pointer != 0)
+	{
+		output[i] = ft_strdup(pointer->name);
+		i++;
+		pointer = pointer->next;
+	}
+	pointer = 0;
+	output[i] = 0;
+	return (output);
 }

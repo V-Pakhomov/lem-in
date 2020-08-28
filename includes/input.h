@@ -29,9 +29,12 @@ int is_comment(char *s);
 int is_cmd(char *s);
 int is_room(char *s);
 int is_link(char *s);
-void input(char *filename);
+int **parse_input(char *filename);
 
 void print_matrix(int **m, int size);
 void print_links(t_link *links);
 void print_rooms(t_room *rooms);
+void print_lst_of_rooms(char **rooms);
+
+char **init_room_names_dict(t_room *rooms, int size);
 #endif

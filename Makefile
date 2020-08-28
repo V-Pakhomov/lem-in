@@ -11,7 +11,8 @@ HEADER = -I $(HEADER_DIR) -I ./libft/libft.h
 SRC_DIR = ./srcs/
 SRC_LIST = input_validator.c \
 init.c \
-temp_helpful.c
+temp_helpful.c \
+checkers.c
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 
