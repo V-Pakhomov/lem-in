@@ -1,5 +1,4 @@
-#include "/Users/admin/school_21/lemin/libft/libft.h"
-#include "input.h"
+#include "lemin.h"
 
 
 
@@ -15,6 +14,7 @@ int get_index(char *room, char **rooms)
 	}
 	return (-1);
 }
+
 
 void fill_matrix(int **matrix, t_link *links, char **rooms)
 {
@@ -36,8 +36,9 @@ void fill_matrix(int **matrix, t_link *links, char **rooms)
 	}
 }
 
-int **parse_input(char *filename)
+t_lemin *parse_input(char *filename)
 {
+	t_lemin *lemin = 0;
 	char	*line = 0;
 	int		matrix_size;
 	int fd;
@@ -53,6 +54,7 @@ int **parse_input(char *filename)
 	matrix = 0;
 	rooms = 0;
 	links = 0;
+	lemin = (t_lemin *)malloc(sizeof(t_lemin));
 	//if (fd < 0)
 		//error handler
 	while (get_next_line(fd, &line))
@@ -84,25 +86,28 @@ int **parse_input(char *filename)
 
 	ft_printf("starting init matrix\n");
 	matrix_size++; //nodes need to be counted starting from 1
-	matrix = intialize_adjacency_matrix(matrix_size);
+	lemin->adj_matrix = intialize_adjacency_matrix(matrix_size);
 	ft_printf("init finished\n");
 
-	print_matrix(matrix, matrix_size);
+	lemin->rooms = init_room_names_dict(rooms, matrix_size);
 
-	char **room_names = init_room_names_dict(rooms, matrix_size);
+	fill_matrix(lemin->adj_matrix, links, lemin->rooms);
 
-	print_lst_of_rooms(room_names);
-
-	fill_matrix(matrix, links, room_names);
-
-	print_matrix(matrix, matrix_size);
-
-	return (matrix);
+	return (lemin);
 }
 
 int main(int argc, char **argv)
 {
 	if (argc > 100)
 		return(0);
-	parse_input(argv[1]);
+
+	t_lemin *lemin = 0;
+
+	lemin = parse_input(argv[1]);
+	lemin->start = get_index("start", lemin->rooms);
+	lemin->end = get_index("end", lemin->rooms);
+
+	print_lst_of_rooms(lemin->rooms);
+	print_matrix(lemin->adj_matrix, 8);
+
 }

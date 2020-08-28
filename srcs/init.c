@@ -1,5 +1,4 @@
-#include "/Users/admin/school_21/lemin/libft/libft.h"
-#include "input.h"
+#include "lemin.h"
 
 
 int **intialize_adjacency_matrix(int size)

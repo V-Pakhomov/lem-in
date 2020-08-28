@@ -12,7 +12,12 @@ SRC_DIR = ./srcs/
 SRC_LIST = input_validator.c \
 init.c \
 temp_helpful.c \
-checkers.c
+checkers.c \
+bin_search.c \
+qsort.c \
+bfs.c \
+ft_queue.c
+
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 
