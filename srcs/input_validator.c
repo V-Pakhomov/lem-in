@@ -108,5 +108,5 @@ int main(int argc, char **argv)
 
 	print_lst_of_rooms(lemin->rooms);
 	print_matrix(lemin->adj_matrix, 7);
-
+	return (0);
 }
