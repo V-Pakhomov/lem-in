@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/29 14:03:38 by rciera           ###   ########.fr       */
+/*   Updated: 2020/08/29 15:31:45 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	print_lemin(t_lemin *lemin);
 ** print_output.c
 */
 void		print_output(t_lemin *lemin);
-
+void		start_and_finish_are_connected(t_lemin *lemin);
 
 
 
