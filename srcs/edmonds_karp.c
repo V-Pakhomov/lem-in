@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:15:14 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/29 15:31:56 by rciera           ###   ########.fr       */
+/*   Updated: 2020/08/29 15:53:48 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static int	find_path(t_lemin *lemin)
 
 void		edmonds_karp(t_lemin *lemin)
 {
-	if (lemin->adj_matrix[lemin->start][lemin->end]);
+	if (lemin->adj_matrix[lemin->start][lemin->end])
 		start_and_finish_are_connected(lemin);
 	malloc_all(lemin);
 	lemin->num_of_paths = 0;
