@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/29 01:24:31 by admin            ###   ########.fr       */
+/*   Updated: 2020/08/29 16:29:56 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_room
 	char	*name;
 	int		x;
 	int		y;
+	int		is_cmd;			//1 - start, 2 - end
 	struct	s_room *next;
 
 }				t_room;
@@ -94,22 +95,22 @@ void			bfs(t_lemin *lemin);
 */
 int **intialize_adjacency_matrix(int size);
 t_link *new_link(char *first, char *last);
-t_room *new_room(char *name);
-void add_room(t_room **all_lst, char *name);
+t_room *new_room(char *name, int cmd_flag);
+void add_room(t_room **all_lst, char *name, int cmd_flag);
 void add_link(t_link **all_lst, char *first, char *last);
 
 int is_comment(char *s);
 int is_cmd(char *s);
 int is_room(char *s);
 int is_link(char *s);
-t_lemin *parse_input(char *filename);
+t_lemin *parse_input(void);
 
 void print_matrix(int **m, int size);
 void print_links(t_link *links);
 void print_rooms(t_room *rooms);
 void print_lst_of_rooms(char **rooms);
 
-char **init_room_names_dict(t_room *rooms, int size);
+char **init_room_names_dict(t_room *rooms, t_lemin *lemin);
 
 
 

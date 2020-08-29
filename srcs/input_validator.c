@@ -36,7 +36,7 @@ void fill_matrix(int **matrix, t_link *links, char **rooms)
 	}
 }
 
-t_lemin *parse_input(char *filename)
+t_lemin *parse_input(void)
 {
 	t_lemin *lemin = 0;
 	char	*line = 0;
@@ -46,18 +46,21 @@ t_lemin *parse_input(char *filename)
 	char **room = 0;
 	char **link = 0;
 	int **matrix;
+	int cmd_flag;
 
 	room = 0;
-	fd = open(filename, O_RDONLY, 0);
+	fd = 0;
 	matrix = 0;
 	rooms = 0;
 	links = 0;
 	lemin = (t_lemin *)malloc(sizeof(t_lemin));
 	lemin->vertices = 0;
+	cmd_flag = 0;
 	//if (fd < 0)
 		//error handler
 	while (get_next_line(fd, &line))
 	{
+		ft_printf("inside");
 		if (is_comment(line))
 		{
 			ft_printf("comment detected\n");
@@ -72,22 +75,23 @@ t_lemin *parse_input(char *filename)
 		{
 			ft_printf("room_detected\n");
 			room = ft_strsplit(line, ' ');
-			add_room(&rooms, room[0]);
+			add_room(&rooms, room[0], cmd_flag);
 			lemin->vertices = lemin->vertices + 1;
+			cmd_flag = 0;
 		}
-		else if (is_cmd(line))
-		{
-			ft_printf("cmd detected\n");
-		}
+		else if (ft_strcmp("##start", line))
+			cmd_flag = 1;
+		else if (ft_strcmp("##end", line))
+			cmd_flag = 2;
 		if (line)
 			free(line);
 	}
 
 	ft_printf("starting init matrix\n");
-	lemin->adj_matrix = intialize_adjacency_matrix(7);
+	lemin->adj_matrix = intialize_adjacency_matrix(lemin->vertices);
 	ft_printf("init finished\n");
 	print_matrix(lemin->adj_matrix, lemin->vertices);
-	lemin->rooms = init_room_names_dict(rooms, lemin->vertices);
+	lemin->rooms = init_room_names_dict(rooms, lemin);
 	ft_qsort(lemin);
 
 	fill_matrix(lemin->adj_matrix, links, lemin->rooms);
@@ -95,18 +99,16 @@ t_lemin *parse_input(char *filename)
 	return (lemin);
 }
 
-int main(int argc, char **argv)
+int main(void)
 {
-	if (argc > 100)
-		return(0);
 
 	t_lemin *lemin = 0;
 
-	lemin = parse_input(argv[1]);
-	lemin->start = get_index("start", lemin->rooms);
-	lemin->end = get_index("end", lemin->rooms);
+	lemin = parse_input();
+	// lemin->start = get_index("start", lemin->rooms);
+	// lemin->end = get_index("end", lemin->rooms);
 
 	print_lst_of_rooms(lemin->rooms);
-	print_matrix(lemin->adj_matrix, 7);
+	print_matrix(lemin->adj_matrix, lemin->vertices);
 
 }
