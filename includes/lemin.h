@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/29 01:24:31 by admin            ###   ########.fr       */
+/*   Updated: 2020/08/29 14:03:38 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,33 @@ void			error_exit(void);
 /*
 ** t_path_functions.c
 */
-void			push_path(t_lemin *lemin, t_path *new);
+void			refresh_paths(t_lemin *lemin);
 
 /*
 ** bfs.c
 */
 void			bfs(t_lemin *lemin);
+
+/*
+** edmonds_karp.c
+*/
+void		edmonds_karp(t_lemin *lemin);
+
+/*
+** file_to_debug.c
+*/
+void	debug_print_rooms(t_lemin *lemin);
+void	print_adj_matrix(t_lemin *lemin);
+void	print_paths(t_lemin *lemin);
+void	print_lemin(t_lemin *lemin);
+
+/*
+** print_output.c
+*/
+void		print_output(t_lemin *lemin);
+
+
+
 
 
 

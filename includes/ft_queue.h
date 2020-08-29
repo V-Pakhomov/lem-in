@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 21:45:28 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/25 17:46:20 by rciera           ###   ########.fr       */
+/*   Updated: 2020/08/29 13:59:03 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,5 @@ void			push_queue(t_queue **q, long long n);
 void			pop_queue(t_queue **q);
 long long		front_queue(t_queue **q);
 long long		back_queue(t_queue **q);
-int				empty_queue(t_queue *q);
 
 #endif

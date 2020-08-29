@@ -6,24 +6,24 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:20:42 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/27 23:55:48 by rciera           ###   ########.fr       */
+/*   Updated: 2020/08/28 15:00:50 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static t_path *new_path(t_lemin *lemin)
+static t_path	*new_path(t_lemin *lemin)
 {
-	t_path *new;
-	int i;
-	int vert;
-	int len;
+	t_path	*new;
+	int		i;
+	int		vert;
+	int		len;
 
+	len = lemin->path_len[lemin->end];
 	if (!(new = (t_path*)malloc(sizeof(t_path))))
 		error_exit();
 	if (!(new->path = (int*)malloc(sizeof(int) * len)))
 		error_exit();
-	len = lemin->path_len[lemin->end];
 	new->ants = 0;
 	new->len = len;
 	new->next = NULL;
@@ -38,7 +38,7 @@ static t_path *new_path(t_lemin *lemin)
 	return (new);
 }
 
-void	set_num_of_first_ant(t_lemin *lemin)
+void			set_num_of_first_ant(t_lemin *lemin)
 {
 	int		first_ant;
 	t_path	*tmp;
@@ -53,12 +53,12 @@ void	set_num_of_first_ant(t_lemin *lemin)
 	}
 }
 
-void	set_ants_to_paths(t_lemin *lemin, int max_path_len)
+void			set_ants_to_paths(t_lemin *lemin, int max_path_len)
 {
+	t_path	*tmp;
 	int		ants;
-	int diff;
-	int mod;
-	t_path *tmp;
+	int		diff;
+	int		mod;
 
 	tmp = lemin->path;
 	ants = lemin->ants;
@@ -73,16 +73,17 @@ void	set_ants_to_paths(t_lemin *lemin, int max_path_len)
 	mod = ants % lemin->num_of_paths;
 	while (tmp)
 	{
-		tmp->ants += mod ? mod--, diff + 1 : diff;
+		tmp->ants += mod ? diff + 1 : diff;
+		mod -= mod ? 1 : 0;
 		tmp = tmp->next;
 	}
+	set_num_of_first_ant(lemin);
 }
 
-void	push_path(t_lemin *lemin, t_path *new)
+static void		push_path(t_lemin *lemin, t_path *new)
 {
 	t_path	*tmp;
 
-	lemin->num_of_paths++;
 	if (!lemin->path)
 	{
 		lemin->path = new;
@@ -97,12 +98,11 @@ void	push_path(t_lemin *lemin, t_path *new)
 	set_ants_to_paths(lemin, new->len);
 }
 
-void refresh_paths(t_lemin *lemin)
+void			refresh_paths(t_lemin *lemin)
 {
 	int max_path;
 
 	lemin->num_of_paths++;
 	max_path = lemin->path_len[lemin->end] + 1;
 	push_path(lemin, new_path(lemin));
-
 }

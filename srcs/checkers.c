@@ -1,4 +1,3 @@
-#include "/Users/admin/school_21/lemin/libft/libft.h"
 #include "lemin.h"
 
 int is_comment(char *s)

@@ -6,14 +6,14 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 15:42:00 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/28 13:59:39 by rciera           ###   ########.fr       */
+/*   Updated: 2020/08/28 14:36:22 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 #include <stdio.h>
 
-void	print_rooms(t_lemin *lemin)
+void	debug_print_rooms(t_lemin *lemin)
 {
 	printf("ROOMS:\n");
 	for (int i = 0; i < lemin->vertices; i++)
@@ -56,8 +56,10 @@ void	print_paths(t_lemin *lemin)
 
 void	print_lemin(t_lemin *lemin)
 {
-	printf("\nstart = [%d] %s\nend = [%d] %s\n\n", lemin->start, lemin->end);
-	print_rooms(lemin);
+	printf("\nstart = [%d] %s\nend = [%d] %s\n\n",
+		lemin->start, lemin->rooms[lemin->start],
+		lemin->end, lemin->rooms[lemin->end]);
+	debug_print_rooms(lemin);
 	print_adj_matrix(lemin);
 	print_paths(lemin);
 }
