@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_paths.c                                       :+:      :+:    :+:   */
+/*   edmonds_karp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:15:14 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/27 23:15:30 by rciera           ###   ########.fr       */
+/*   Updated: 2020/08/28 16:51:22 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static void malloc_all(t_lemin *lemin)
+static void	malloc_all(t_lemin *lemin)
 {
 	lemin->path = NULL;
 	if (!(lemin->used = (int*)malloc(sizeof(int) * lemin->ants)) ||
@@ -21,7 +21,7 @@ static void malloc_all(t_lemin *lemin)
 		error_exit();
 }
 
-static void reset_arrays_for_bfs(t_lemin *lemin)
+static void	reset_arrays_for_bfs(t_lemin *lemin)
 {
 	int i;
 
@@ -34,7 +34,7 @@ static void reset_arrays_for_bfs(t_lemin *lemin)
 	}
 }
 
-static void delete_vericies(t_lemin *lemin)
+static void	delete_vericies(t_lemin *lemin)
 {
 	int i;
 	int j;
@@ -52,12 +52,24 @@ static void delete_vericies(t_lemin *lemin)
 	}
 }
 
-int find_paths(t_lemin *lemin)
+static int	find_path(t_lemin *lemin)
 {
-	reset_arrays_for_bfs(lemin);
 	bfs(lemin);
 	if (!lemin->used[lemin->end] ||
 		lemin->max_path_len - lemin->path_len[lemin->end] < 2)
-		return ;
-	
+		return (0);
+	refresh_paths(lemin);
+	return (1);
+}
+
+void		edmonds_karp(t_lemin *lemin)
+{
+	malloc_all(lemin);
+	lemin->num_of_paths = 0;
+	while (find_path(lemin))
+	{
+		reset_arrays_for_bfs(lemin);
+		delete_vericies(lemin);
+	}
+	print_output(lemin);
 }
