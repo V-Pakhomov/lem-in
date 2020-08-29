@@ -12,28 +12,18 @@ int **intialize_adjacency_matrix(int size)
 	j = 0;
 	line = 0;
 	matrix = 0;
-	matrix = (int **)malloc(sizeof(int *) * size);
+	if (!(matrix = (int **)malloc(sizeof(int *) * size)))
+		return (0);
 	while(i < size)
 	{
 		j = 0;
-		matrix[i] = (int *)malloc(sizeof(int) * size);
-		if (i == 0)  //numerating first line
+		if (!(matrix[i] = (int *)malloc(sizeof(int) * size)))
+			return(0);
+		while(j < size)
 		{
-			while(j < size)
-			{
-				matrix[i][j] = j;
-				j++;
-			}
+			matrix[i][j] = 0;
+			j++;
 		}
-		else
-		{
-			while(j < size)
-			{
-				matrix[i][j] = 0;
-				j++;
-			}
-		}
-		matrix[i][0] = i; //numerating every first element in each line
 		i++;
 	}
 	return(matrix);
@@ -101,10 +91,9 @@ char **init_room_names_dict(t_room *rooms, int size)
 
 	size++;
 
-	output = (char **)malloc(sizeof(char *) * (size + 1));
-
-	output[0] = ft_strdup("0");
-	i = 1;
+	if (!(output = (char **)malloc(sizeof(char *) * (size + 1))))
+		ft_printf("lol\n");
+	i = 0;
 	while(pointer != 0)
 	{
 		output[i] = ft_strdup(pointer->name);

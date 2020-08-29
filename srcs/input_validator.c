@@ -40,7 +40,6 @@ t_lemin *parse_input(char *filename)
 {
 	t_lemin *lemin = 0;
 	char	*line = 0;
-	int		matrix_size;
 	int fd;
 	t_room *rooms;
 	t_link *links;
@@ -48,13 +47,13 @@ t_lemin *parse_input(char *filename)
 	char **link = 0;
 	int **matrix;
 
-	matrix_size = 0;
 	room = 0;
 	fd = open(filename, O_RDONLY, 0);
 	matrix = 0;
 	rooms = 0;
 	links = 0;
 	lemin = (t_lemin *)malloc(sizeof(t_lemin));
+	lemin->vertices = 0;
 	//if (fd < 0)
 		//error handler
 	while (get_next_line(fd, &line))
@@ -74,7 +73,7 @@ t_lemin *parse_input(char *filename)
 			ft_printf("room_detected\n");
 			room = ft_strsplit(line, ' ');
 			add_room(&rooms, room[0]);
-			matrix_size++;
+			lemin->vertices = lemin->vertices + 1;
 		}
 		else if (is_cmd(line))
 		{
@@ -85,11 +84,11 @@ t_lemin *parse_input(char *filename)
 	}
 
 	ft_printf("starting init matrix\n");
-	matrix_size++; //nodes need to be counted starting from 1
-	lemin->adj_matrix = intialize_adjacency_matrix(matrix_size);
+	lemin->adj_matrix = intialize_adjacency_matrix(7);
 	ft_printf("init finished\n");
-
-	lemin->rooms = init_room_names_dict(rooms, matrix_size);
+	print_matrix(lemin->adj_matrix, lemin->vertices);
+	lemin->rooms = init_room_names_dict(rooms, lemin->vertices);
+	ft_qsort(lemin);
 
 	fill_matrix(lemin->adj_matrix, links, lemin->rooms);
 
@@ -108,6 +107,6 @@ int main(int argc, char **argv)
 	lemin->end = get_index("end", lemin->rooms);
 
 	print_lst_of_rooms(lemin->rooms);
-	print_matrix(lemin->adj_matrix, 8);
+	print_matrix(lemin->adj_matrix, 7);
 
 }
