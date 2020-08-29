@@ -9,14 +9,19 @@ HEADER_DIR = ./includes/
 HEADER = -I $(HEADER_DIR) -I ./libft/libft.h
 
 SRC_DIR = ./srcs/
-SRC_LIST = input_validator.c \
-init.c \
-temp_helpful.c \
-checkers.c \
-bin_search.c \
-qsort.c \
-bfs.c \
-ft_queue.c
+SRC_LIST = 	input_validator.c \
+			init.c \
+			temp_helpful.c \
+			checkers.c \
+			bin_search.c \
+			qsort.c \
+			bfs.c \
+			ft_queue.c \
+			edmonds_karp.c \
+			file_to_debug.c \
+			t_paths_functions.c \
+			error.c \
+			print_output.c
 
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))

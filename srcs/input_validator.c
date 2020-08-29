@@ -110,5 +110,4 @@ int main(void)
 
 	print_lst_of_rooms(lemin->rooms);
 	print_matrix(lemin->adj_matrix, lemin->vertices);
-
 }
