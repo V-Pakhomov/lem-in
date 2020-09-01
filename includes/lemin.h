@@ -13,8 +13,7 @@
 #ifndef LEMIN_H
 # define LEMIN_H
 
-# include "../libft/libft.h"
-# include "ft_queue.h"
+# include "../libft/includes/libft.h"
 
 typedef struct	s_path
 {
