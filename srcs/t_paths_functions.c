@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:20:42 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/28 15:00:50 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/02 18:41:48 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,13 @@ static void		push_path(t_lemin *lemin, t_path *new)
 
 	if (!lemin->path)
 	{
+		ft_printf("FIRST\n");
 		lemin->path = new;
 		lemin->path->ants = lemin->ants;
 		lemin->path->first_ant = 1;
 		return ;
 	}
+	ft_printf("NOT FIRST\n");
 	tmp = lemin->path;
 	while (tmp->next)
 		tmp = tmp->next;

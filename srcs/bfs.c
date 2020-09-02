@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:21:46 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/28 14:52:17 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/02 18:39:50 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	bfs(t_lemin *lemin)
 	queue = NULL;
 	push_queue(&queue, lemin->start);
 	lemin->path_len[lemin->start] = 0;
-	while (queue)
+	while (!empty_queue(queue))
 	{
 		vert = front_queue(&queue);
 		pop_queue(&queue);

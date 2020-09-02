@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:15:14 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/29 15:53:48 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/02 18:39:52 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ static void	delete_vericies(t_lemin *lemin)
 
 static int	find_path(t_lemin *lemin)
 {
+
 	bfs(lemin);
 	if (!lemin->used[lemin->end] ||
 		lemin->max_path_len - lemin->path_len[lemin->end] < 2)

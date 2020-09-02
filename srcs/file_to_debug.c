@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 15:42:00 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/02 17:28:24 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/02 17:37:08 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	debug_print_rooms(t_lemin *lemin)
 	{
 		printf("[%d] %s", i, lemin->rooms[i]);
 		if (i == lemin->start)
-			printf("	%s##START%s\n", BLUE, RESET);
+			printf(" %s##START%s\n", BLUE, RESET);
 		else if (i == lemin->end)
-			printf("	%s##END%s\n", RED, RESET);
+			printf(" %s##END%s\n", RED, RESET);
 		else
 			printf("\n");
 	}

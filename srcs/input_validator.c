@@ -104,5 +104,6 @@ int main(void)
 
 	//print_lst_of_rooms(lemin.rooms);
 	//print_matrix(lemin.adj_matrix, lemin.vertices);
-	print_lemin(&lemin);
+	edmonds_karp(&lemin);
+	//print_lemin(&lemin);
 }

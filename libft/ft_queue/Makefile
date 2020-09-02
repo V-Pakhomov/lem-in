@@ -6,7 +6,7 @@
 #    By: rciera <rciera@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/09 20:27:55 by rciera            #+#    #+#              #
-#    Updated: 2020/08/31 09:06:12 by rciera           ###   ########.fr        #
+#    Updated: 2020/09/02 18:25:01 by rciera           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,12 @@ HEADERS = $(addprefix $(HEADERS_DIR), $(HEADERS_LIST))
 
 SRC_DIR = src/
 
-SRC_LIST = ft_queue.c
+SRC_LIST =	push_queue.c\
+			pop_queue.c\
+			front_queue.c\
+			back_queue.c\
+			empty_queue.c\
+			size_queue.c\
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 
