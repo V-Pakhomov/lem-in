@@ -6,7 +6,7 @@
 #    By: rciera <rciera@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/01 08:43:18 by rciera            #+#    #+#              #
-#    Updated: 2020/09/01 08:43:24 by rciera           ###   ########.fr        #
+#    Updated: 2020/09/02 15:36:30 by rciera           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,6 @@ SRC_LIST = 	input_validator.c \
 			bin_search.c \
 			qsort.c \
 			bfs.c \
-			ft_queue.c \
 			edmonds_karp.c \
 			file_to_debug.c \
 			t_paths_functions.c \
@@ -47,7 +46,7 @@ OBJ = $(addprefix $(OBJ_DIR), $(OBJ_LIST))
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@make re -C $(LIBFT_DIR)
+	@make -C $(LIBFT_DIR)
 	@gcc -o $(NAME) $(HEADER) $(OBJ) $(LIBFT)
 
 $(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HEADER_DIR)*.h
