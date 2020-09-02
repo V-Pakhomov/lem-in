@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 17:25:36 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/01 09:03:43 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/02 17:18:17 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include "colors.h"
 # include "../ft_printf/includes/ft_printf.h"
 # include "../ft_queue/includes/ft_queue.h"
 # define MIN_INT -2147483648

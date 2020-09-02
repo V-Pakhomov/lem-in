@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/29 16:41:44 by admin            ###   ########.fr       */
+/*   Updated: 2020/09/02 16:37:43 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,14 +123,14 @@ int is_comment(char *s);
 int is_cmd(char *s);
 int is_room(char *s);
 int is_link(char *s);
-t_lemin *parse_input(void);
+void parse_input(t_lemin *lemin);
 
 void print_matrix(int **m, int size);
 void print_links(t_link *links);
 void print_rooms(t_room *rooms);
 void print_lst_of_rooms(char **rooms);
 
-char **init_room_names_dict(t_room *rooms, t_lemin *lemin);
+void	init_room_names_dict(t_room *rooms, t_lemin *lemin);
 
 
 

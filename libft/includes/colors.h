@@ -1,34 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   bin_search.c                                       :+:      :+:    :+:   */
+/*   colors.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/21 13:53:13 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/02 15:49:59 by rciera           ###   ########.fr       */
+/*   Created: 2020/08/04 19:54:07 by rciera            #+#    #+#             */
+/*   Updated: 2020/09/02 17:16:43 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lemin.h"
+#ifndef VISUALISATION_H
+# define VISUALISATION_H
 
-int room_num(t_lemin *lemin, char *key)
-{
-	int l;
-	int m;
-	int r;
+# include <time.h>
+# include <sys/times.h>
 
-	l = 0;
-	r = lemin->vertices;
-	while (r - l > 1)
-	{
-		m = (r + l) / 2;
-		if (ft_strcmp(lemin->rooms[m], key) <= 0)
-			l = m;
-		else
-			r = m;
-	}
-	if (ft_strcmp(lemin->rooms[l], key))
-		return (-1);
-	return (l);
-}
+# define RESET "\033[0m"
+# define BLACK "\033[1;30m"
+# define RED "\033[1;31m"
+# define GREEN "\033[1;32m"
+# define YELLOW "\033[1;33m"
+# define BLUE "\033[1;34m"
+# define WHITE "\033[1;37m"
+
+#endif

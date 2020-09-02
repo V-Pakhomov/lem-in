@@ -81,29 +81,32 @@ void add_link(t_link **all_lst, char *first, char *last)
 		*all_lst = new_link(first, last);
 }
 
-char **init_room_names_dict(t_room *rooms, t_lemin *lemin)
+void	init_room_names_dict(t_room *rooms, t_lemin *lemin)
 {
 	int i;
-	char **output;
-	t_room *pointer;
+	char *start;
+	char *end;
 
-	output = 0;
-	pointer = rooms;;
-
-	if (!(output = (char **)malloc(sizeof(char *) * (lemin->vertices + 1))))
-		ft_printf("lol\n");
+	if (!(lemin->rooms = (char **)malloc(sizeof(char *) * lemin->vertices)))
+		error_exit();
+	start = NULL;
+	end = NULL;
 	i = 0;
-	while(pointer != 0)
+	while(rooms)
 	{
-		if (pointer->is_cmd == 1)
-			lemin->start = i;
-		else if (pointer->is_cmd == 2)
-			lemin->end = i;
-		output[i] = ft_strdup(pointer->name);
+		if (rooms->is_cmd == 1)
+			start = ft_strdup(rooms->name);
+		else if (rooms->is_cmd == 2)
+			end = ft_strdup(rooms->name);
+		lemin->rooms[i] = ft_strdup(rooms->name);
 		i++;
-		pointer = pointer->next;
+		rooms = rooms->next;
 	}
-	pointer = 0;
-	output[i] = 0;
-	return (output);
+	if (!start || !end)
+		error_exit();
+	ft_qsort(lemin);
+	lemin->start = room_num(lemin, start);
+	lemin->end = room_num(lemin, end);
+	if (lemin->start == -1 || lemin->end == -1)
+		error_exit();
 }
