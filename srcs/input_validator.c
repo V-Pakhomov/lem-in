@@ -51,8 +51,9 @@ void	parse_input(t_lemin *lemin)
 	links = 0;
 	lemin->vertices = 0;
 	cmd_flag = 0;
-	//if (fd < 0)
-		//error handler
+	get_next_line(fd, &line);
+	lemin->ants = ft_atoi(line);
+	free(line);
 	while (get_next_line(fd, &line))
 	{	
 		//ft_printf("inside");
@@ -81,7 +82,6 @@ void	parse_input(t_lemin *lemin)
 		if (line)
 			free(line);
 	}
-
 	//ft_printf("starting init matrix\n");
 	lemin->adj_matrix = intialize_adjacency_matrix(lemin->vertices);
 	//ft_printf("init finished\n");
@@ -99,11 +99,6 @@ int main(void)
 	t_lemin lemin;
 
 	parse_input(&lemin);
-	// lemin->start = get_index("start", lemin->rooms);
-	// lemin->end = get_index("end", lemin->rooms);
-
-	//print_lst_of_rooms(lemin.rooms);
-	//print_matrix(lemin.adj_matrix, lemin.vertices);
 	edmonds_karp(&lemin);
 	//print_lemin(&lemin);
 }

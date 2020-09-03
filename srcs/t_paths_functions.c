@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:20:42 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/02 18:41:48 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/03 13:38:31 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void			set_ants_to_paths(t_lemin *lemin, int max_path_len)
 	tmp = lemin->path;
 	diff = ants / lemin->num_of_paths;
 	mod = ants % lemin->num_of_paths;
+	lemin->max_path_len = tmp->len + diff + (mod > 0);
 	while (tmp)
 	{
 		tmp->ants += mod ? diff + 1 : diff;
@@ -86,13 +87,11 @@ static void		push_path(t_lemin *lemin, t_path *new)
 
 	if (!lemin->path)
 	{
-		ft_printf("FIRST\n");
 		lemin->path = new;
 		lemin->path->ants = lemin->ants;
 		lemin->path->first_ant = 1;
 		return ;
 	}
-	ft_printf("NOT FIRST\n");
 	tmp = lemin->path;
 	while (tmp->next)
 		tmp = tmp->next;

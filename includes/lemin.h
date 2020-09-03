@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/02 16:37:43 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/03 13:16:08 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ void	debug_print_rooms(t_lemin *lemin);
 void	print_adj_matrix(t_lemin *lemin);
 void	print_paths(t_lemin *lemin);
 void	print_lemin(t_lemin *lemin);
+void	print_bfs_info(t_lemin *lemin);
 
 /*
 ** print_output.c

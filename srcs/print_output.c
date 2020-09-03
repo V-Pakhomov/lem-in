@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 16:25:44 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/29 15:30:58 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/03 14:35:09 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void		print_output(t_lemin *lemin)
 	line = 0;
 	while (printable(lemin, line++))
 		ft_printf("\n");
-	ft_printf("\n");
 	exit(0);
 }
 

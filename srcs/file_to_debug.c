@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 15:42:00 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/02 17:37:08 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/03 14:02:47 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	print_adj_matrix(t_lemin *lemin)
 			printf(" %d %s|", lemin->adj_matrix[i][j], RESET);
 		}
 	}
+	printf("\n");
 }
 
 void	print_paths(t_lemin *lemin)
@@ -76,6 +77,21 @@ void	print_paths(t_lemin *lemin)
 		printf("\n%20c\n", '-');
 		tmp = tmp->next;
 	}
+}
+
+void	print_bfs_info(t_lemin *lemin)
+{
+	//debug_print_rooms(lemin);
+	ft_printf("used:\n");
+	for (int i = 0; i < lemin->vertices; i++)
+		ft_printf("[%d] %d| ", i, lemin->used[i]);
+	ft_printf("\nparents:\n");
+	for (int i = 0; i < lemin->vertices; i++)
+		ft_printf("[%d] %d| ", i, lemin->parent[i]);
+	ft_printf("\nlen of path:\n");
+	for (int i = 0; i < lemin->vertices; i++)
+		ft_printf("[%d] %d| ", i, lemin->path_len[i]);
+	ft_printf("\n");
 }
 
 void	print_lemin(t_lemin *lemin)
