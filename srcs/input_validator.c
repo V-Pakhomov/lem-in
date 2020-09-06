@@ -55,7 +55,7 @@ void	parse_input(t_lemin *lemin)
 	lemin->ants = ft_atoi(line);
 	free(line);
 	while (get_next_line(fd, &line))
-	{	
+	{
 		//ft_printf("inside");
 		if (is_comment(line))
 		{
@@ -100,5 +100,5 @@ int main(void)
 
 	parse_input(&lemin);
 	edmonds_karp(&lemin);
-	//print_lemin(&lemin);
+	print_lemin(&lemin);
 }
