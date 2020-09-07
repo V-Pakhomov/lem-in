@@ -19,7 +19,7 @@ static void	malloc_all(t_lemin *lemin)
 		!(lemin->parent = (int*)malloc(sizeof(int) * lemin->ants)) ||
 		!(lemin->path_len = (int*)malloc(sizeof(int) * lemin->ants)))
 		error_exit();
-	lemin->max_path_len = lemin->vertices;
+	lemin->max_path_len = lemin->vertices + lemin->ants;
 }
 
 static void	reset_arrays_for_bfs(t_lemin *lemin)
