@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/lemin",
-			"args": ["m.map"],
+			"args": [""],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",
 			"environment": [],

@@ -36,3 +36,28 @@ int is_link(char *s)
 		return (1);
 	return (0);
 }
+
+int check_dup_elem(char *line, t_room *rooms)
+{
+	t_room *ptr;
+	char **room;
+
+	room = 0;
+	room = ft_strsplit(line, ' ');
+
+	ptr = rooms;
+	while(ptr != 0)
+	{
+		if (ptr->name == room[0] || (ptr->x == ft_atoi(room[1]) && ptr->y == ft_atoi(room[2])))
+		{
+			ft_arrayfree(room);
+			room = 0;
+			error_exit();
+			return(0);
+		}
+		ptr = ptr->next;
+	}
+	ft_arrayfree(room);
+	room = 0;
+	return(1);
+}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edmonds_karp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:15:14 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/03 14:33:47 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/06 21:51:51 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ void		edmonds_karp(t_lemin *lemin)
 		delete_vericies(lemin);
 		reset_arrays_for_bfs(lemin);
 	}
+	if (!lemin->path)
+		error_exit();
 	print_output(lemin);
 }

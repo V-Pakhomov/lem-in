@@ -33,6 +33,61 @@ void fill_matrix(t_lemin *lemin, t_link *links)
 	}
 }
 
+int rooms_exists(t_room *rooms, t_link *links)
+{
+	t_room *ptr;
+	int first_ok;
+	int last_ok;
+
+	first_ok = 0;
+	last_ok = 0;
+
+	ptr = rooms;
+	while(ptr != 0)
+	{
+		if (ft_strequ(ptr->name, links->first))
+			first_ok++;
+		if (ft_strequ(ptr->name, links->last))
+			last_ok++;
+		ptr = ptr->next;
+	}
+	if (first_ok && last_ok)
+		return (1);
+	return(0);
+}
+
+int final_validation(t_room *rooms, t_link *links, t_lemin *lemin)
+{
+	int counter = 0;
+	int counter_2 = 0;
+	int start_existing_flag = 0;
+	int end_existing_flag = 0;
+	if (lemin->ants == 0)
+		error_exit();
+	t_room *ptr = rooms;
+	t_link *lnk = links;
+	while(ptr != 0)
+	{
+		if (ptr->is_cmd == 1)
+			start_existing_flag++;
+		if (ptr->is_cmd == 2)
+			end_existing_flag++;
+		ptr = ptr->next;
+		counter++;
+	}
+	while(lnk != 0)
+	{
+		if (!rooms_exists(rooms, lnk))
+			return(0);
+		lnk = lnk->next;
+		counter_2++;
+	}
+	if (!counter || !counter_2 ||
+			start_existing_flag != 1 || end_existing_flag != 1)
+		return (0);
+	return(1);
+}
+
 void	parse_input(t_lemin *lemin)
 {
 	char	*line = 0;
@@ -41,37 +96,32 @@ void	parse_input(t_lemin *lemin)
 	t_link *links;
 	char **room = 0;
 	char **link = 0;
-	int **matrix;
 	int cmd_flag;
 
 	room = 0;
 	fd = 0;
-	matrix = 0;
 	rooms = 0;
 	links = 0;
 	lemin->vertices = 0;
 	cmd_flag = 0;
-	get_next_line(fd, &line);
-	lemin->ants = ft_atoi(line);
+	if (get_next_line(fd, &line) && ft_isinteger(line))
+		lemin->ants = ft_atoi(line);
+	else
+		error_exit();
 	free(line);
 	while (get_next_line(fd, &line))
 	{
-		//ft_printf("inside");
 		if (is_comment(line))
 		{
-			//ft_printf("comment detected\n");
 		}
 		else if (is_link(line))
 		{
 			link = ft_strsplit(line, '-');
 			add_link(&links, link[0], link[1]);
-			//ft_printf("link detected\n");
 		}
-		else if (is_room(line))
+		else if (is_room(line) && check_dup_elem(line, rooms))
 		{
-			//ft_printf("room_detected\n");
-			room = ft_strsplit(line, ' ');
-			add_room(&rooms, room[0], cmd_flag);
+			add_room(&rooms, line, cmd_flag);
 			lemin->vertices++;
 			cmd_flag = 0;
 		}
@@ -79,18 +129,16 @@ void	parse_input(t_lemin *lemin)
 			cmd_flag = 1;
 		else if (ft_strequ("##end", line))
 			cmd_flag = 2;
+		else
+			error_exit();
 		if (line)
 			free(line);
 	}
-	//ft_printf("starting init matrix\n");
+	if (!final_validation(rooms, links, lemin))
+		error_exit();
 	lemin->adj_matrix = intialize_adjacency_matrix(lemin->vertices);
-	//ft_printf("init finished\n");
-	//print_matrix(lemin->adj_matrix, lemin->vertices);
 	init_room_names_dict(rooms, lemin);
-
 	fill_matrix(lemin, links);
-
-	//return (lemin);
 }
 
 int main(void)
@@ -100,5 +148,5 @@ int main(void)
 
 	parse_input(&lemin);
 	edmonds_karp(&lemin);
-	print_lemin(&lemin);
+	//print_lemin(&lemin);
 }

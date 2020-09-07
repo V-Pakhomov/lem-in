@@ -41,30 +41,35 @@ t_link *new_link(char *first, char *last)
 	return(new);
 }
 
-t_room *new_room(char *name, int cmd_flag)
+t_room *new_room(char **room, int cmd_flag)
 {
 	t_room *new;
 
 	if (!(new = (t_room *)malloc(sizeof(t_room))))
 		return (0);
-	new->name = ft_strdup(name);
+	new->name = ft_strdup(room[0]);
 	new->next = 0;
 	new->is_cmd = cmd_flag;
+	new->x = ft_atoi(room[1]);
+	new->y = ft_atoi(room[2]);
 	return(new);
 }
 
 void add_room(t_room **all_lst, char *name, int cmd_flag)
 {
 	t_room *new;
+	char **room;
 
+	room = 0;
+	room = ft_strsplit(name, ' ');
 	if (*all_lst != NULL)
 	{
-		new = new_room(name, cmd_flag);
+		new = new_room(room, cmd_flag);
 		new->next = *all_lst;
 		*all_lst = new;
 	}
 	else
-		*all_lst = new_room(name, cmd_flag);
+		*all_lst = new_room(room, cmd_flag);
 }
 
 void add_link(t_link **all_lst, char *first, char *last)

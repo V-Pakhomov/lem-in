@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/03 13:16:08 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/05 23:56:39 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void		start_and_finish_are_connected(t_lemin *lemin);
 */
 int **intialize_adjacency_matrix(int size);
 t_link *new_link(char *first, char *last);
-t_room *new_room(char *name, int cmd_flag);
+t_room *new_room(char **room, int cmd_flag);
 void add_room(t_room **all_lst, char *name, int cmd_flag);
 void add_link(t_link **all_lst, char *first, char *last);
 
@@ -132,7 +132,6 @@ void print_rooms(t_room *rooms);
 void print_lst_of_rooms(char **rooms);
 
 void	init_room_names_dict(t_room *rooms, t_lemin *lemin);
-
-
+int check_dup_elem(char *line, t_room *rooms);
 
 #endif
