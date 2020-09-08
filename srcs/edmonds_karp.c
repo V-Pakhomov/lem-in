@@ -15,9 +15,9 @@
 static void	malloc_all(t_lemin *lemin)
 {
 	lemin->path = NULL;
-	if (!(lemin->used = (int*)malloc(sizeof(int) * lemin->ants)) ||
-		!(lemin->parent = (int*)malloc(sizeof(int) * lemin->ants)) ||
-		!(lemin->path_len = (int*)malloc(sizeof(int) * lemin->ants)))
+	if (!(lemin->used = (int*)malloc(sizeof(int) * lemin->vertices)) ||
+		!(lemin->parent = (int*)malloc(sizeof(int) * lemin->vertices)) ||
+		!(lemin->path_len = (int*)malloc(sizeof(int) * lemin->vertices)))
 		error_exit();
 	lemin->max_path_len = lemin->vertices + lemin->ants;
 }
