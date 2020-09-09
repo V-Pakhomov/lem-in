@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/05 23:56:39 by admin            ###   ########.fr       */
+/*   Updated: 2020/09/09 15:35:53 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,6 @@ typedef struct	s_path
 	int				*path;
 	struct s_path	*next;
 }				t_path;
-
-typedef struct	s_lemin
-{
-	int		start;
-	int		end;
-	int		ants;
-	int		vertices;
-	char	**rooms;
-	int		**adj_matrix;
-	int		*used;
-	int		*parent;
-	int		*path_len;
-	int		max_path_len;
-	int 	num_of_paths;
-	t_path	*path;
-}				t_lemin;
-
 
 typedef struct s_link
 {
@@ -58,6 +41,22 @@ typedef struct s_room
 	struct	s_room *next;
 
 }				t_room;
+
+typedef struct	s_lemin
+{
+	int		start;
+	int		end;
+	int		ants;
+	int		vertices;
+	char	**rooms;
+	t_room	**adj_list;
+	int		*used;
+	int		*parent;
+	int		*path_len;
+	int		max_path_len;
+	int 	num_of_paths;
+	t_path	*path;
+}				t_lemin;
 
 
 /*
@@ -114,7 +113,7 @@ void		start_and_finish_are_connected(t_lemin *lemin);
 ** validation and input parsing
 ** TO DO: refactor and sort
 */
-int **intialize_adjacency_matrix(int size);
+void intialize_adjacency_matrix(t_lemin *lemin);
 t_link *new_link(char *first, char *last);
 t_room *new_room(char **room, int cmd_flag);
 void add_room(t_room **all_lst, char *name, int cmd_flag);
