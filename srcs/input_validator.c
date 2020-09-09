@@ -62,7 +62,7 @@ int final_validation(t_room *rooms, t_link *links, t_lemin *lemin)
 	int counter_2 = 0;
 	int start_existing_flag = 0;
 	int end_existing_flag = 0;
-	if (lemin->ants == 0)
+	if (lemin->ants <= 0)
 		error_exit();
 	t_room *ptr = rooms;
 	t_link *lnk = links;
