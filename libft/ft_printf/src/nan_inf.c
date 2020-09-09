@@ -6,13 +6,13 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/01 13:38:46 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/06 18:37:30 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/09 14:44:38 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/hidden.h"
 
-static void	nan(t_printf *pf, t_arg **arg)
+static void	nan_f(t_printf *pf, t_arg **arg)
 {
 	int no_err;
 
@@ -77,7 +77,7 @@ int			nan_inf(t_printf *pf, t_arg **arg, long double db)
 	else if (db == 1 / -0.0)
 		minus_inf(pf, arg);
 	else if (db != db)
-		nan(pf, arg);
+		nan_f(pf, arg);
 	else
 		return (0);
 	if (!(*arg)->out)
