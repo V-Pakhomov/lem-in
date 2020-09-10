@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/09 15:35:53 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/10 14:51:44 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,20 +42,26 @@ typedef struct s_room
 
 }				t_room;
 
+typedef struct	s_neighbor
+{
+	int					room;
+	struct s_neighbor	*next;
+}				t_neighbor;
+
 typedef struct	s_lemin
 {
-	int		start;
-	int		end;
-	int		ants;
-	int		vertices;
-	char	**rooms;
-	t_room	**adj_list;
-	int		*used;
-	int		*parent;
-	int		*path_len;
-	int		max_path_len;
-	int 	num_of_paths;
-	t_path	*path;
+	int			start;
+	int			end;
+	int			ants;
+	int			vertices;
+	char		**rooms;
+	t_neighbor	**adj_list;
+	int			*used;
+	int			*parent;
+	int			*path_len;
+	int			max_path_len;
+	int 		num_of_paths;
+	t_path		*path;
 }				t_lemin;
 
 
@@ -104,6 +110,11 @@ void	print_bfs_info(t_lemin *lemin);
 void		print_output(t_lemin *lemin);
 void		start_and_finish_are_connected(t_lemin *lemin);
 
+/*
+** t_neighbors.c
+*/
+void	add_neighbor(t_neighbor **neighbor, int n);
+void	delete_neighbor(t_neighbor **neighbor, int n);
 
 
 
@@ -113,7 +124,7 @@ void		start_and_finish_are_connected(t_lemin *lemin);
 ** validation and input parsing
 ** TO DO: refactor and sort
 */
-void intialize_adjacency_matrix(t_lemin *lemin);
+void intialize_adjacency_list(t_lemin *lemin, t_link *links);
 t_link *new_link(char *first, char *last);
 t_room *new_room(char **room, int cmd_flag);
 void add_room(t_room **all_lst, char *name, int cmd_flag);

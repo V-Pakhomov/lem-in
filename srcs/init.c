@@ -1,32 +1,23 @@
 #include "lemin.h"
 
 
-int **intialize_adjacency_matrix(int size)
+void intialize_adjacency_list(t_lemin *lemin, t_link *links)
 {
 	int i;
 	int j;
-	int *line;
-	int **matrix;
 
-	i = 0;
-	j = 0;
-	line = 0;
-	matrix = 0;
-	if (!(matrix = (int **)malloc(sizeof(int *) * size)))
-		return (0);
-	while(i < size)
+	if (!(lemin->adj_list = (t_neighbor**)malloc(sizeof(t_neighbor*) * lemin->vertices)))
+		error_exit();
+	while(links)
 	{
-		j = 0;
-		if (!(matrix[i] = (int *)malloc(sizeof(int) * size)))
-			return(0);
-		while(j < size)
-		{
-			matrix[i][j] = 0;
-			j++;
-		}
-		i++;
+		i = room_num(lemin, links->first);
+		j = room_num(lemin, links->last);
+		if (i == -1 || j == - 1)
+			error_exit();
+		add_neighbor(&(lemin->adj_list[i]), j);
+		add_neighbor(&(lemin->adj_list[j]), i);
+		links = links->next;
 	}
-	return(matrix);
 }
 
 t_link *new_link(char *first, char *last)
@@ -76,9 +67,9 @@ void add_link(t_link **all_lst, char *first, char *last)
 {
 	t_link *new;
 
+	new = new_link(first, last);
 	if (*all_lst != NULL)
 	{
-		new = new_link(first, last);
 		new->next = *all_lst;
 		*all_lst = new;
 	}

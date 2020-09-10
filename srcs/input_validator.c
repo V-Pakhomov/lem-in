@@ -1,7 +1,5 @@
 #include "lemin.h"
 
-
-
 int get_index(char *room, char **rooms)
 {
 	int i;
@@ -13,24 +11,6 @@ int get_index(char *room, char **rooms)
 		i++;
 	}
 	return (-1);
-}
-
-
-void fill_matrix(t_lemin *lemin, t_link *links)
-{
-	int i;
-	int j;
-
-	while(links)
-	{
-		i = room_num(lemin, links->first);
-		j = room_num(lemin, links->last);
-		if (i == -1 || j == - 1)
-			ft_printf("ooops");
-		lemin->adj_matrix[i][j] = 1;
-		lemin->adj_matrix[j][i] = 1;
-		links = links->next;
-	}
 }
 
 int rooms_exists(t_room *rooms, t_link *links)
@@ -136,9 +116,8 @@ void	parse_input(t_lemin *lemin)
 	}
 	if (!final_validation(rooms, links, lemin))
 		error_exit();
-	lemin->adj_matrix = intialize_adjacency_matrix(lemin->vertices);
+	intialize_adjacency_list(lemin, links);
 	init_room_names_dict(rooms, lemin);
-	fill_matrix(lemin, links);
 }
 
 int main(void)
