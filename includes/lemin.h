@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/10 14:51:44 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/10 15:50:27 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,28 +93,29 @@ void			bfs(t_lemin *lemin);
 /*
 ** edmonds_karp.c
 */
-void		edmonds_karp(t_lemin *lemin);
+void			edmonds_karp(t_lemin *lemin);
 
 /*
 ** file_to_debug.c
 */
-void	debug_print_rooms(t_lemin *lemin);
-void	print_adj_matrix(t_lemin *lemin);
-void	print_paths(t_lemin *lemin);
-void	print_lemin(t_lemin *lemin);
-void	print_bfs_info(t_lemin *lemin);
+void			debug_print_rooms(t_lemin *lemin);
+void			print_adj_matrix(t_lemin *lemin);
+void			print_paths(t_lemin *lemin);
+void			print_lemin(t_lemin *lemin);
+void			print_bfs_info(t_lemin *lemin);
 
 /*
 ** print_output.c
 */
-void		print_output(t_lemin *lemin);
-void		start_and_finish_are_connected(t_lemin *lemin);
+void			print_output(t_lemin *lemin);
+void			start_and_finish_are_connected(t_lemin *lemin);
 
 /*
 ** t_neighbors.c
 */
-void	add_neighbor(t_neighbor **neighbor, int n);
-void	delete_neighbor(t_neighbor **neighbor, int n);
+void			add_neighbor(t_neighbor **neighbor, int n);
+void			delete_neighbor(t_neighbor **neighbor, int n);
+int				is_neighbor(t_lemin *lemin, int n, int m);
 
 
 

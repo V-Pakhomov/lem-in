@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 13:20:51 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/10 14:38:37 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/10 15:46:53 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,18 @@ void				delete_neighbor(t_neighbor **neighbor, int n)
 		tmp = next;
 		next = next->next;
 	}
+}
+
+int					is_neighbor(t_lemin *lemin, int n, int m)
+{
+	t_neighbor *tmp;
+
+	tmp = lemin->adj_list[n];
+	while (tmp)
+	{
+		if (tmp->room == m)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
 }

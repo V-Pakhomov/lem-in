@@ -68,6 +68,8 @@ void add_link(t_link **all_lst, char *first, char *last)
 	t_link *new;
 	t_link *tmp;
 
+	if (ft_strequ(first, last))
+		return ;
 	new = new_link(first, last);
 	if (*all_lst == NULL)
 	{

@@ -1,18 +1,5 @@
 #include "lemin.h"
 
-int get_index(char *room, char **rooms)
-{
-	int i;
-	i = 0;
-	while(rooms[i] != 0)
-	{
-		if (!ft_strcmp(rooms[i], room))
-			return(i);
-		i++;
-	}
-	return (-1);
-}
-
 int rooms_exists(t_room *rooms, t_link *links)
 {
 	t_room *ptr;
