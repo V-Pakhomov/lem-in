@@ -66,7 +66,6 @@ void add_room(t_room **all_lst, char *name, int cmd_flag)
 void add_link(t_link **all_lst, char *first, char *last)
 {
 	t_link *new;
-	t_link *tmp;
 
 	if (ft_strequ(first, last))
 		return ;
@@ -75,17 +74,6 @@ void add_link(t_link **all_lst, char *first, char *last)
 	{
 		*all_lst = new;
 		return ;
-	}
-	tmp = *all_lst;
-	while (tmp)
-	{
-		if ((ft_strequ(tmp->first, first) && ft_strequ(tmp->last, last)) ||
-			(ft_strequ(tmp->first, last) && ft_strequ(tmp->last, first)))
-			{
-				free(new);
-				return ;
-			}
-		tmp = tmp->next;
 	}
 	new->next = *all_lst;
 	*all_lst = new;

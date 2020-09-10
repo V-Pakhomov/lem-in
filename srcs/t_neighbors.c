@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 13:20:51 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/10 15:46:53 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/10 16:53:01 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,20 @@ static t_neighbor	*new_neighbor(int n)
 void				add_neighbor(t_neighbor **neighbor, int n)
 {
 	t_neighbor *new;
+	t_neighbor *tmp;
 
 	new = new_neighbor(n);
 	if (*neighbor == NULL)
 	{
 		*neighbor = new;
+		return ;
+	}
+	tmp = *neighbor;
+	while (tmp && tmp->room != n)
+		tmp = tmp->next;
+	if (tmp != NULL)
+	{
+		free(new);
 		return ;
 	}
 	new->next = *neighbor;

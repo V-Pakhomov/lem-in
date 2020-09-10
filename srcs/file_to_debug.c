@@ -6,14 +6,14 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 15:42:00 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/03 14:02:47 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/10 16:30:39 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 #include <stdio.h>
 
-void	debug_print_rooms(t_lemin *lemin)
+void	print_rooms(t_lemin *lemin)
 {
 	printf("ROOMS:\n");
 	for (int i = 0; i < lemin->vertices; i++)
@@ -28,33 +28,28 @@ void	debug_print_rooms(t_lemin *lemin)
 	}
 }
 
-void	print_adj_matrix(t_lemin *lemin)
+void	print_adj_list(t_lemin *lemin)
 {
-	printf("%4c", '|');
+	t_neighbor *nghbr;
+
 	for (int i = 0; i < lemin->vertices; i++)
 	{
+		nghbr = lemin->adj_list[i];
 		if (i == lemin->start)
 			printf("%s", BLUE);
 		if (i == lemin->end)
 			printf("%s", RED);
-		printf("%3d%s|", i, RESET);
-	}
-	for (int i = 0; i < lemin->vertices; i++)
-	{
-		printf("\n");
-		for (int j = 0; j < (lemin->vertices + 1) * 4; j++)
-			printf("-");
-		if (i == lemin->start)
-			printf("%s", BLUE);
-		if (i == lemin->end)
-			printf("%s", RED);
-		printf("\n%3d%s|", i, RESET);
-		for (int j = 0; j < lemin->vertices; j++)
+		printf("%d%s : ", i, RESET);
+		while (nghbr)
 		{
-			if (lemin->adj_matrix[i][j])
-				printf("%s", GREEN);
-			printf(" %d %s|", lemin->adj_matrix[i][j], RESET);
+			if (nghbr->room == lemin->start)
+				printf("%s", BLUE);
+			if (nghbr->room == lemin->end)
+				printf("%s", RED);
+			printf("| %d |%s", nghbr->room, RESET);
+			nghbr = nghbr->next;
 		}
+		printf("\n");
 	}
 	printf("\n");
 }
@@ -96,7 +91,7 @@ void	print_bfs_info(t_lemin *lemin)
 
 void	print_lemin(t_lemin *lemin)
 {
-	debug_print_rooms(lemin);
-	print_adj_matrix(lemin);
+	print_rooms(lemin);
+	print_adj_list(lemin);
 	//print_paths(lemin);
 }

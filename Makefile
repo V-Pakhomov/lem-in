@@ -6,7 +6,7 @@
 #    By: rciera <rciera@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/01 08:43:18 by rciera            #+#    #+#              #
-#    Updated: 2020/09/10 15:53:40 by rciera           ###   ########.fr        #
+#    Updated: 2020/09/10 16:27:22 by rciera           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,8 @@ SRC_LIST = 	input_validator.c \
 			t_paths_functions.c \
 			error.c \
 			print_output.c \
-			t_neighbors.c
+			t_neighbors.c \
+			file_to_debug.c
 
 
 SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))

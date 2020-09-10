@@ -1,23 +1,5 @@
 #include "lemin.h"
 
-
-void	debug_print_rooms(t_lemin *lemin)
-{
-	ft_printf("ROOMS:\n");
-	for (int i = 0; i < lemin->vertices; i++)
-	{
-		ft_printf("[%d] %s", i, lemin->rooms[i]);
-		if (i == lemin->start)
-			ft_printf(" %s##START%s\n", BLUE, RESET);
-		else if (i == lemin->end)
-			ft_printf(" %s##END%s\n", RED, RESET);
-		else
-			ft_printf("\n");
-	}
-}
-
-
-
 int rooms_exists(t_room *rooms, t_link *links)
 {
 	t_room *ptr;
@@ -131,6 +113,6 @@ int main(void)
 	t_lemin lemin;
 
 	parse_input(&lemin);
-	edmonds_karp(&lemin);
 	//print_lemin(&lemin);
+	edmonds_karp(&lemin);
 }

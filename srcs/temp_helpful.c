@@ -29,19 +29,6 @@ void print_links(t_link *links)
 	}
 }
 
-
-void print_rooms(t_room *rooms)
-{
-	t_room *l = 0;
-	l = rooms;
-	while(l != 0)
-	{
-		ft_printf("Room: %s\n", l->name);
-		l = l->next;
-	}
-}
-
-
 void print_lst_of_rooms(char **rooms)
 {
 	int i = 0;

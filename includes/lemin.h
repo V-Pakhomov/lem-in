@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/10 15:50:27 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/10 16:20:15 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ void			edmonds_karp(t_lemin *lemin);
 /*
 ** file_to_debug.c
 */
-void			debug_print_rooms(t_lemin *lemin);
-void			print_adj_matrix(t_lemin *lemin);
+void			print_rooms(t_lemin *lemin);
+void			print_adj_list(t_lemin *lemin);
 void			print_paths(t_lemin *lemin);
 void			print_lemin(t_lemin *lemin);
 void			print_bfs_info(t_lemin *lemin);
@@ -139,7 +139,6 @@ void parse_input(t_lemin *lemin);
 
 void print_matrix(int **m, int size);
 void print_links(t_link *links);
-void print_rooms(t_room *rooms);
 void print_lst_of_rooms(char **rooms);
 
 void	init_room_names_dict(t_room *rooms, t_lemin *lemin);
