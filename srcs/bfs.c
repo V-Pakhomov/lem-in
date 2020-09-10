@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:21:46 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/03 14:34:09 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/10 15:33:49 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 void	bfs(t_lemin *lemin)
 {
 	t_queue		*queue;
+	t_neighbor	*nghbr;
 	long long	vert;
-	int			i;
 
 	queue = NULL;
 	push_queue(&queue, lemin->start);
@@ -28,17 +28,17 @@ void	bfs(t_lemin *lemin)
 		pop_queue(&queue);
 		if (vert == lemin->end)
 			break ;
-		i = 0;
-		while (i < lemin->vertices)
+		nghbr = lemin->adj_list[vert];
+		while (nghbr)
 		{
-			if (lemin->adj_matrix[vert][i] && !lemin->used[i])
+			if (!lemin->used[nghbr->room])
 			{
-				push_queue(&queue, i);
-				lemin->parent[i] = vert;
-				lemin->path_len[i] = lemin->path_len[vert] + 1;
-				lemin->used[i] = 1;
+				push_queue(&queue, nghbr->room);
+				lemin->parent[nghbr->room] = vert;
+				lemin->path_len[nghbr->room] = lemin->path_len[vert] + 1;
+				lemin->used[nghbr->room] = 1;
 			}
-			i++;
+			nghbr = nghbr->next;
 		}
 	}
 }

@@ -1,38 +1,5 @@
 #include "lemin.h"
 
-
-
-int get_index(char *room, char **rooms)
-{
-	int i;
-	i = 0;
-	while(rooms[i] != 0)
-	{
-		if (!ft_strcmp(rooms[i], room))
-			return(i);
-		i++;
-	}
-	return (-1);
-}
-
-
-void fill_matrix(t_lemin *lemin, t_link *links)
-{
-	int i;
-	int j;
-
-	while(links)
-	{
-		i = room_num(lemin, links->first);
-		j = room_num(lemin, links->last);
-		if (i == -1 || j == - 1)
-			ft_printf("ooops");
-		lemin->adj_matrix[i][j] = 1;
-		lemin->adj_matrix[j][i] = 1;
-		links = links->next;
-	}
-}
-
 int rooms_exists(t_room *rooms, t_link *links)
 {
 	t_room *ptr;
@@ -136,9 +103,8 @@ void	parse_input(t_lemin *lemin)
 	}
 	if (!final_validation(rooms, links, lemin))
 		error_exit();
-	lemin->adj_matrix = intialize_adjacency_matrix(lemin->vertices);
 	init_room_names_dict(rooms, lemin);
-	fill_matrix(lemin, links);
+	intialize_adjacency_list(lemin, links);
 }
 
 int main(void)
@@ -147,6 +113,6 @@ int main(void)
 	t_lemin lemin;
 
 	parse_input(&lemin);
-	edmonds_karp(&lemin);
 	//print_lemin(&lemin);
+	edmonds_karp(&lemin);
 }

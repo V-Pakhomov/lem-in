@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/05 23:56:39 by admin            ###   ########.fr       */
+/*   Updated: 2020/09/10 16:20:15 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,6 @@ typedef struct	s_path
 	int				*path;
 	struct s_path	*next;
 }				t_path;
-
-typedef struct	s_lemin
-{
-	int		start;
-	int		end;
-	int		ants;
-	int		vertices;
-	char	**rooms;
-	int		**adj_matrix;
-	int		*used;
-	int		*parent;
-	int		*path_len;
-	int		max_path_len;
-	int 	num_of_paths;
-	t_path	*path;
-}				t_lemin;
-
 
 typedef struct s_link
 {
@@ -58,6 +41,28 @@ typedef struct s_room
 	struct	s_room *next;
 
 }				t_room;
+
+typedef struct	s_neighbor
+{
+	int					room;
+	struct s_neighbor	*next;
+}				t_neighbor;
+
+typedef struct	s_lemin
+{
+	int			start;
+	int			end;
+	int			ants;
+	int			vertices;
+	char		**rooms;
+	t_neighbor	**adj_list;
+	int			*used;
+	int			*parent;
+	int			*path_len;
+	int			max_path_len;
+	int 		num_of_paths;
+	t_path		*path;
+}				t_lemin;
 
 
 /*
@@ -88,23 +93,29 @@ void			bfs(t_lemin *lemin);
 /*
 ** edmonds_karp.c
 */
-void		edmonds_karp(t_lemin *lemin);
+void			edmonds_karp(t_lemin *lemin);
 
 /*
 ** file_to_debug.c
 */
-void	debug_print_rooms(t_lemin *lemin);
-void	print_adj_matrix(t_lemin *lemin);
-void	print_paths(t_lemin *lemin);
-void	print_lemin(t_lemin *lemin);
-void	print_bfs_info(t_lemin *lemin);
+void			print_rooms(t_lemin *lemin);
+void			print_adj_list(t_lemin *lemin);
+void			print_paths(t_lemin *lemin);
+void			print_lemin(t_lemin *lemin);
+void			print_bfs_info(t_lemin *lemin);
 
 /*
 ** print_output.c
 */
-void		print_output(t_lemin *lemin);
-void		start_and_finish_are_connected(t_lemin *lemin);
+void			print_output(t_lemin *lemin);
+void			start_and_finish_are_connected(t_lemin *lemin);
 
+/*
+** t_neighbors.c
+*/
+void			add_neighbor(t_neighbor **neighbor, int n);
+void			delete_neighbor(t_neighbor **neighbor, int n);
+int				is_neighbor(t_lemin *lemin, int n, int m);
 
 
 
@@ -114,7 +125,7 @@ void		start_and_finish_are_connected(t_lemin *lemin);
 ** validation and input parsing
 ** TO DO: refactor and sort
 */
-int **intialize_adjacency_matrix(int size);
+void intialize_adjacency_list(t_lemin *lemin, t_link *links);
 t_link *new_link(char *first, char *last);
 t_room *new_room(char **room, int cmd_flag);
 void add_room(t_room **all_lst, char *name, int cmd_flag);
@@ -128,7 +139,6 @@ void parse_input(t_lemin *lemin);
 
 void print_matrix(int **m, int size);
 void print_links(t_link *links);
-void print_rooms(t_room *rooms);
 void print_lst_of_rooms(char **rooms);
 
 void	init_room_names_dict(t_room *rooms, t_lemin *lemin);

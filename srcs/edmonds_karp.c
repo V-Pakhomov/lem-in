@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   edmonds_karp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:15:14 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/06 21:51:51 by admin            ###   ########.fr       */
+/*   Updated: 2020/09/10 15:52:47 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,19 @@ static void	reset_arrays_for_bfs(t_lemin *lemin)
 
 static void	delete_vericies(t_lemin *lemin)
 {
+	t_neighbor *nghbr;
 	int i;
 	int j;
 
 	i = lemin->parent[lemin->end];
 	while (i != lemin->start)
 	{
-		j = 0;
-		while (j < lemin->vertices)
+		nghbr = lemin->adj_list[i];
+		while (nghbr)
 		{
-			lemin->adj_matrix[i][j] = 0;
-			lemin->adj_matrix[j++][i] = 0;
+			j = nghbr->room;
+			delete_neighbor(&(lemin->adj_list[j]), i);
+			nghbr = nghbr->next;
 		}
 		i = lemin->parent[i];
 	}
@@ -66,7 +68,7 @@ static int	find_path(t_lemin *lemin)
 
 void		edmonds_karp(t_lemin *lemin)
 {
-	if (lemin->adj_matrix[lemin->start][lemin->end])
+	if (is_neighbor(lemin, lemin->start, lemin->end))
 		start_and_finish_are_connected(lemin);
 	malloc_all(lemin);
 	reset_arrays_for_bfs(lemin);
