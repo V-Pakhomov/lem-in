@@ -66,15 +66,27 @@ void add_room(t_room **all_lst, char *name, int cmd_flag)
 void add_link(t_link **all_lst, char *first, char *last)
 {
 	t_link *new;
+	t_link *tmp;
 
 	new = new_link(first, last);
-	if (*all_lst != NULL)
+	if (*all_lst == NULL)
 	{
-		new->next = *all_lst;
 		*all_lst = new;
+		return ;
 	}
-	else
-		*all_lst = new_link(first, last);
+	tmp = *all_lst;
+	while (tmp)
+	{
+		if ((ft_strequ(tmp->first, first) && ft_strequ(tmp->last, last)) ||
+			(ft_strequ(tmp->first, last) && ft_strequ(tmp->last, first)))
+			{
+				free(new);
+				return ;
+			}
+		tmp = tmp->next;
+	}
+	new->next = *all_lst;
+	*all_lst = new;
 }
 
 void	init_room_names_dict(t_room *rooms, t_lemin *lemin)
