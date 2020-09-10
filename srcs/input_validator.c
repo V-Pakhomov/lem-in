@@ -1,5 +1,23 @@
 #include "lemin.h"
 
+
+void	debug_print_rooms(t_lemin *lemin)
+{
+	ft_printf("ROOMS:\n");
+	for (int i = 0; i < lemin->vertices; i++)
+	{
+		ft_printf("[%d] %s", i, lemin->rooms[i]);
+		if (i == lemin->start)
+			ft_printf(" %s##START%s\n", BLUE, RESET);
+		else if (i == lemin->end)
+			ft_printf(" %s##END%s\n", RED, RESET);
+		else
+			ft_printf("\n");
+	}
+}
+
+
+
 int rooms_exists(t_room *rooms, t_link *links)
 {
 	t_room *ptr;
@@ -103,8 +121,8 @@ void	parse_input(t_lemin *lemin)
 	}
 	if (!final_validation(rooms, links, lemin))
 		error_exit();
-	intialize_adjacency_list(lemin, links);
 	init_room_names_dict(rooms, lemin);
+	intialize_adjacency_list(lemin, links);
 }
 
 int main(void)
