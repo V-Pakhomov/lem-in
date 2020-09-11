@@ -37,6 +37,7 @@ int is_link(char *s)
 	return (0);
 }
 
+
 int check_dup_elem(char *line, t_room *rooms)
 {
 	t_room *ptr;

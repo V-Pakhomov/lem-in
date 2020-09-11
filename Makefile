@@ -3,63 +3,79 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rciera <rciera@student.42.fr>              +#+  +:+       +#+         #
+#    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/01 08:43:18 by rciera            #+#    #+#              #
-#    Updated: 2020/09/10 16:27:22 by rciera           ###   ########.fr        #
+#    Updated: 2020/09/11 21:56:38 by admin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = lemin
-FLAG = -Wall -Wextra -Werror -g
+LOG_GREEN = \033[32m
+
+ARCHIVE = libftlemin.a
+
+NAME = lem-in
+
+LIB = ./libft/
+
+LIB_A = libft/libft.a
+
+INCLUDES = -I ./includes/ -I libft/includes/
 
 
-LIBFT_DIR = ./libft/
-LIBFT = $(LIBFT_DIR)libft.a
+SOURCES = input_validator.c \
+		init.c \
+		temp_helpful.c \
+		checkers.c \
+		bin_search.c \
+		qsort.c \
+		bfs.c \
+		edmonds_karp.c \
+		t_paths_functions.c \
+		error.c \
+		print_output.c \
+		t_neighbors.c \
+		file_to_debug.c
 
-HEADER_DIR = ./includes/
-HEADER = -I $(HEADER_DIR) -I ./libft/libft.h
+SRCDIR = srcs
+OBJDIR = obj
 
-SRC_DIR = ./srcs/
-SRC_LIST = 	input_validator.c \
-			init.c \
-			temp_helpful.c \
-			checkers.c \
-			bin_search.c \
-			qsort.c \
-			bfs.c \
-			edmonds_karp.c \
-			t_paths_functions.c \
-			error.c \
-			print_output.c \
-			t_neighbors.c \
-			file_to_debug.c
+SRC = $(addprefix $(SRCDIR)/, $(SOURCES))
+
+OBJ = $(addprefix $(OBJDIR)/, $(SOURCES:.c=.o))
+
+CCFL = -Wall -Wextra -Werror -g
 
 
-SRC = $(addprefix $(SRC_DIR), $(SRC_LIST))
 
-OBJ_DIR = ./obj/
-OBJ_LIST = $(patsubst %.c, %.o, $(SRC_LIST))
-OBJ = $(addprefix $(OBJ_DIR), $(OBJ_LIST))
+all: obj_dir library $(ARCHIVE) $(NAME)
 
-.PHONY: all clean fclean re
+obj_dir:
+	@mkdir -p $(OBJDIR)
 
-all: $(NAME)
+library:
+	@make -sC $(LIB)
+
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@gcc $(CCFL) -o $@ -c $< $(INCLUDES)
+
+$(ARCHIVE): $(OBJ)
+	@ar rc $(ARCHIVE) $(OBJ)
+	@ranlib $(ARCHIVE)
 
 $(NAME): $(OBJ)
-	@make -C $(LIBFT_DIR)
-	@gcc -o $(NAME) $(HEADER) $(OBJ) $(LIBFT)
-
-$(OBJ_DIR)%.o : $(SRC_DIR)%.c $(HEADER_DIR)*.h
-	@mkdir -p $(OBJ_DIR)
-	@gcc -c $(HEADER) $< -o $@ $(FLAG)
+	@gcc $(CCFL) -o $(NAME) $(ARCHIVE) $(LIB_A)
+	@echo "$(LOG_GREEN)Lem_in has compiled successfully!$(LOG_NOCOLOR)"
 
 clean:
-	@rm -rf $(OBJ_DIR)
-	@make clean -C $(LIBFT_DIR)
+	@make clean -sC $(LIB)
+	@/bin/rm -rf $(OBJDIR)
 
 fclean: clean
-	@rm -f $(NAME)
-	@make fclean -C $(LIBFT_DIR)
+	@/bin/rm -f $(ARCHIVE)
+	@/bin/rm -f $(NAME)
+	@make fclean -sC $(LIB)
 
 re: fclean all
+
+.PHONY: all clean fclean re
