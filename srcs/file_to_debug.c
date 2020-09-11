@@ -35,18 +35,19 @@ void	print_adj_list(t_lemin *lemin)
 	for (int i = 0; i < lemin->vertices; i++)
 	{
 		nghbr = lemin->adj_list[i];
+		printf("[%d] ", i);
 		if (i == lemin->start)
 			printf("%s", BLUE);
 		if (i == lemin->end)
 			printf("%s", RED);
-		printf("%d%s : ", i, RESET);
+		printf("%s%s : ", lemin->rooms[i], RESET);
 		while (nghbr)
 		{
 			if (nghbr->room == lemin->start)
 				printf("%s", BLUE);
 			if (nghbr->room == lemin->end)
 				printf("%s", RED);
-			printf("| %d |%s", nghbr->room, RESET);
+			printf("| %s |%s", lemin->rooms[nghbr->room], RESET);
 			nghbr = nghbr->next;
 		}
 		printf("\n");
