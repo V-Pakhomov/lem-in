@@ -12,10 +12,8 @@ int is_cmd(char *s)
 
 int is_room(char *s)
 {
-	int i;
 	char **s_for_inspect;
 
-	i = 0;
 	s_for_inspect = ft_strsplit(s, ' ');
 	if (s_for_inspect[0][0] == '#' || s_for_inspect[0][1] == 'L' || ft_strchr(s_for_inspect[0], '-'))
 		return (0);
@@ -27,10 +25,8 @@ int is_room(char *s)
 
 int is_link(char *s)
 {
-	int i;
 	char **s_for_inspect;
 
-	i = 0;
 	s_for_inspect = ft_strsplit(s, '-');
 	if (ft_arraylen(s_for_inspect) == 2)
 		return (1);

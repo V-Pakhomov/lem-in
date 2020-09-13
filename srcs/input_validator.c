@@ -61,15 +61,14 @@ void	parse_input(t_lemin *lemin)
 	int fd;
 	t_room *rooms;
 	t_link *links;
-	char **room = 0;
 	char **link = 0;
 	int cmd_flag;
 
-	room = 0;
 	fd = 0;
 	rooms = 0;
 	links = 0;
 	lemin->vertices = 0;
+	lemin->links = 0;
 	cmd_flag = 0;
 	if (get_next_line(fd, &line) && ft_isinteger(line))
 		lemin->ants = ft_atoi(line);
@@ -101,6 +100,8 @@ void	parse_input(t_lemin *lemin)
 		if (line)
 			free(line);
 	}
+	lemin->links = links;
+	lemin->rooms_raw = rooms;
 	if (!final_validation(rooms, links, lemin))
 		error_exit();
 	init_room_names_dict(rooms, lemin);

@@ -61,6 +61,8 @@ typedef struct	s_lemin
 	int			max_path_len;
 	int 		num_of_paths;
 	t_path		*path;
+	t_link		*links;
+	t_room		*rooms_raw;
 }				t_lemin;
 
 
@@ -108,6 +110,7 @@ void			print_bfs_info(t_lemin *lemin);
 */
 void			print_output(t_lemin *lemin);
 void			start_and_finish_are_connected(t_lemin *lemin);
+void prnt_lst_rooms(t_room *rooms);
 
 /*
 ** t_neighbors.c

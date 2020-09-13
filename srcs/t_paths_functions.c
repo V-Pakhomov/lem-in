@@ -101,9 +101,7 @@ static void		push_path(t_lemin *lemin, t_path *new)
 
 void			refresh_paths(t_lemin *lemin)
 {
-	int max_path;
-
 	lemin->num_of_paths++;
-	max_path = lemin->path_len[lemin->end] + 1;
+	// lemin->path_len[lemin->end] + 1;
 	push_path(lemin, new_path(lemin));
 }

@@ -38,10 +38,39 @@ static int	printable(t_lemin *lemin, int line)
 	return (was_printed);
 }
 
+void prnt_lst_links(t_link *links)
+{
+	t_link *ptr;
+
+	ptr = links;
+	while(ptr != 0)
+	{
+		ft_printf("%s-%s\n", ptr->first, ptr->last);
+		ptr = ptr->next;
+	}
+}
+
+void prnt_lst_rooms(t_room *rooms)
+{
+	t_room *ptr;
+
+	ptr = rooms;
+	while(ptr != 0)
+	{
+	if (ptr != 0)
+	{
+		ft_printf("%s %d %d\n", ptr->name, ptr->x, ptr->y);
+		ptr = ptr->next;
+	}
+   }
+}
+
 void		print_output(t_lemin *lemin)
 {
 	int line;
-
+	ft_printf("%d\n", lemin->ants);
+	prnt_lst_rooms(lemin->rooms_raw);
+	prnt_lst_links(lemin->links);
 	line = 0;
 	while (printable(lemin, line++))
 		ft_printf("\n");
