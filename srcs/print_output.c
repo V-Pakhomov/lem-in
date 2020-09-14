@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 16:25:44 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/14 18:08:28 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/14 18:55:20 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void		print_output(t_lemin *lemin)
 	line = 0;
 	while (printable(lemin, line++))
 		ft_printf("\n");
-	while (1) {}
 	exit(0);
 }
 
@@ -82,10 +81,12 @@ void		start_and_finish_are_connected(t_lemin *lemin)
 {
 	int i;
 
+	ft_printf("%d\n", lemin->ants);
+	prnt_lst_rooms(lemin->rooms_raw);
+	prnt_lst_links(lemin->links);
 	i = 1;
 	while (i <= lemin->ants)
 		ft_printf("L%d-%s ", i++, lemin->rooms[lemin->end]);
 	ft_printf("\n");
-	while (1) {}
 	exit(0);
 }
