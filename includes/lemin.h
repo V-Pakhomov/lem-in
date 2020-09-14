@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/11 21:57:22 by admin            ###   ########.fr       */
+/*   Updated: 2020/09/14 18:46:02 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,6 @@ void prnt_lst_rooms(t_room *rooms);
 void			add_neighbor(t_neighbor **neighbor, int n);
 void			delete_neighbor(t_neighbor **neighbor, int n);
 int				is_neighbor(t_lemin *lemin, int n, int m);
-
 
 
 

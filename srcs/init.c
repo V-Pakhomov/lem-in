@@ -61,6 +61,7 @@ void add_room(t_room **all_lst, char *name, int cmd_flag)
 	}
 	else
 		*all_lst = new_room(room, cmd_flag);
+	ft_arrayfree(room);
 }
 
 void add_link(t_link **all_lst, char *first, char *last)
@@ -107,4 +108,6 @@ void	init_room_names_dict(t_room *rooms, t_lemin *lemin)
 	lemin->end = room_num(lemin, end);
 	if (lemin->start == -1 || lemin->end == -1)
 		error_exit();
+	// free(start);
+	// free(end);
 }
