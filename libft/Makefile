@@ -6,21 +6,24 @@
 #    By: rciera <rciera@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/09 20:27:55 by rciera            #+#    #+#              #
-#    Updated: 2020/09/14 16:54:41 by rciera           ###   ########.fr        #
+#    Updated: 2020/09/14 18:02:10 by rciera           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+LOG_GREEN = \033[32m
+LOG_NOCOLOR = \033[0m
 
 NAME = libft.a
 
 CC = gcc
 
-FT_PRINTF_DIR = ft_printf/
+FT_PRINTF_DIR = ./ft_printf/
 FT_PRINTF = $(FT_PRINTF_DIR)ft_printf.a
 
-FT_QUEUE_DIR = ft_queue/
+FT_QUEUE_DIR = ./ft_queue/
 FT_QUEUE = $(FT_QUEUE_DIR)ft_queue.a
 
-ARR_INT_DIR = array_int/
+ARR_INT_DIR = ./array_int/
 ARR_INT = $(ARR_INT_DIR)array_int.a
 
 HEADERS_DIR = includes/
@@ -123,35 +126,36 @@ FLAGS = -Wall -Wextra -Werror -c
 all: $(OBJ_DIR) $(FT_QUEUE) $(ARR_INT) $(FT_PRINTF) $(NAME)
 
 $(ARR_INT):
-	make -C $(ARR_INT_DIR)
-	cd $(OBJ_DIR)$(ARR_INT_DIR); ar -x ../../$(ARR_INT)
+	@make -C $(ARR_INT_DIR)
+	@cd $(OBJ_DIR)$(ARR_INT_DIR); ar -x ../../$(ARR_INT)
 
 $(FT_QUEUE):
-	make -C $(FT_QUEUE_DIR)
-	cd $(OBJ_DIR)$(FT_QUEUE_DIR); ar -x ../../$(FT_QUEUE)
+	@make -C $(FT_QUEUE_DIR)
+	@cd $(OBJ_DIR)$(FT_QUEUE_DIR); ar -x ../../$(FT_QUEUE)
 
 $(FT_PRINTF):
-	make -C $(FT_PRINTF_DIR)
-	cd $(OBJ_DIR)$(FT_PRINTF_DIR); ar -x ../../$(FT_PRINTF)
+	@make -C $(FT_PRINTF_DIR)
+	@cd $(OBJ_DIR)$(FT_PRINTF_DIR); ar -x ../../$(FT_PRINTF)
 
 $(NAME): $(OBJ)
 	ar rc $(NAME) $(OBJ) $(OBJ_DIR)$(ARR_INT_DIR)*.o $(OBJ_DIR)$(FT_PRINTF_DIR)*.o $(OBJ_DIR)$(FT_QUEUE_DIR)*.o
 	ranlib $(NAME)
+	@echo "$(LOG_GREEN)Libft has compiled successfully!$(LOG_NOCOLOR)"
 
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
-	mkdir -p $(OBJ_DIR)$(FT_PRINTF_DIR)
-	mkdir -p $(OBJ_DIR)$(FT_QUEUE_DIR)
-	mkdir -p $(OBJ_DIR)$(ARR_INT_DIR)
+	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)$(FT_PRINTF_DIR)
+	@mkdir -p $(OBJ_DIR)$(FT_QUEUE_DIR)
+	@mkdir -p $(OBJ_DIR)$(ARR_INT_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS)
 	$(CC) $(FLAGS) $< $(INCLUDES) -o $@
 
 clean:
-	rm -Rf $(OBJ_DIR)
-	make clean -C $(ARR_INT_DIR)
-	make clean -C $(FT_QUEUE_DIR)
-	make clean -C $(FT_PRINTF_DIR)
+	@rm -Rf $(OBJ_DIR)
+	@make clean -sC $(ARR_INT_DIR)
+	@make clean -sC $(FT_QUEUE_DIR)
+	@make clean -sC $(FT_PRINTF_DIR)
 
 fclean: clean
 	rm -f $(NAME)

@@ -6,9 +6,12 @@
 #    By: rciera <rciera@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/09 20:27:55 by rciera            #+#    #+#              #
-#    Updated: 2020/09/14 15:47:59 by rciera           ###   ########.fr        #
+#    Updated: 2020/09/14 17:53:49 by rciera           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+LOG_GREEN = \033[32m
+LOG_NOCOLOR = \033[0m
 
 NAME = array_int.a
 
@@ -49,9 +52,10 @@ all: $(NAME)
 $(NAME): $(OBJ_DIR) $(OBJ)
 	ar rc $(NAME) $(OBJ)	
 	ranlib $(NAME)
+	@echo "$(LOG_GREEN)Array_int has compiled successfully!$(LOG_NOCOLOR)"
 
 $(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS)
 	$(CC) $(FLAGS) $< $(INCLUDES) -o $@

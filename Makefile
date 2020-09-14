@@ -3,14 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
+#    By: rciera <rciera@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/01 08:43:18 by rciera            #+#    #+#              #
-#    Updated: 2020/09/11 21:56:38 by admin            ###   ########.fr        #
+#    Updated: 2020/09/14 18:00:58 by rciera           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 LOG_GREEN = \033[32m
+LOG_NOCOLOR = \033[0m
 
 ARCHIVE = libftlemin.a
 
@@ -54,17 +55,17 @@ obj_dir:
 	@mkdir -p $(OBJDIR)
 
 library:
-	@make -sC $(LIB)
+	@make -C $(LIB)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@gcc $(CCFL) -o $@ -c $< $(INCLUDES)
+	gcc $(CCFL) -o $@ -c $< $(INCLUDES)
 
 $(ARCHIVE): $(OBJ)
 	@ar rc $(ARCHIVE) $(OBJ)
 	@ranlib $(ARCHIVE)
 
 $(NAME): $(OBJ)
-	@gcc $(CCFL) -o $(NAME) $(ARCHIVE) $(LIB_A)
+	gcc $(CCFL) -o $(NAME) $(ARCHIVE) $(LIB_A)
 	@echo "$(LOG_GREEN)Lem_in has compiled successfully!$(LOG_NOCOLOR)"
 
 clean:
@@ -72,9 +73,9 @@ clean:
 	@/bin/rm -rf $(OBJDIR)
 
 fclean: clean
-	@/bin/rm -f $(ARCHIVE)
-	@/bin/rm -f $(NAME)
-	@make fclean -sC $(LIB)
+	/bin/rm -f $(ARCHIVE)
+	/bin/rm -f $(NAME)
+	@make fclean -C $(LIB)
 
 re: fclean all
 
