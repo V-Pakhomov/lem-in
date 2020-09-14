@@ -6,7 +6,7 @@
 #    By: rciera <rciera@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/09 20:27:55 by rciera            #+#    #+#              #
-#    Updated: 2020/09/14 15:47:47 by rciera           ###   ########.fr        #
+#    Updated: 2020/09/14 16:54:41 by rciera           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -124,19 +124,25 @@ all: $(OBJ_DIR) $(FT_QUEUE) $(ARR_INT) $(FT_PRINTF) $(NAME)
 
 $(ARR_INT):
 	make -C $(ARR_INT_DIR)
+	cd $(OBJ_DIR)$(ARR_INT_DIR); ar -x ../../$(ARR_INT)
 
 $(FT_QUEUE):
 	make -C $(FT_QUEUE_DIR)
+	cd $(OBJ_DIR)$(FT_QUEUE_DIR); ar -x ../../$(FT_QUEUE)
 
 $(FT_PRINTF):
 	make -C $(FT_PRINTF_DIR)
+	cd $(OBJ_DIR)$(FT_PRINTF_DIR); ar -x ../../$(FT_PRINTF)
 
 $(NAME): $(OBJ)
-	ar rc $(NAME) $(OBJ) $(FT_QUEUE) $(FT_PRINTF) $(ARR_INT)
+	ar rc $(NAME) $(OBJ) $(OBJ_DIR)$(ARR_INT_DIR)*.o $(OBJ_DIR)$(FT_PRINTF_DIR)*.o $(OBJ_DIR)$(FT_QUEUE_DIR)*.o
 	ranlib $(NAME)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
+	mkdir -p $(OBJ_DIR)$(FT_PRINTF_DIR)
+	mkdir -p $(OBJ_DIR)$(FT_QUEUE_DIR)
+	mkdir -p $(OBJ_DIR)$(ARR_INT_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS)
 	$(CC) $(FLAGS) $< $(INCLUDES) -o $@
