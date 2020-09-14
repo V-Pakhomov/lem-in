@@ -6,17 +6,13 @@
 #    By: rciera <rciera@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/09 20:27:55 by rciera            #+#    #+#              #
-#    Updated: 2020/09/02 18:25:01 by rciera           ###   ########.fr        #
+#    Updated: 2020/09/14 15:10:16 by rciera           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = libft.a
+NAME = ft_queue.a
 
 CC = gcc
-
-LIB_DIR = ../
-
-LIBFT_A = $(LIB_DIR)$(NAME)
 
 HEADERS_DIR = includes/
 
@@ -24,7 +20,9 @@ HEADERS_LIST = ft_queue.h
 
 HEADERS = $(addprefix $(HEADERS_DIR), $(HEADERS_LIST))
 
-SRC_DIR = src/
+INCLUDES = -I $(HEADERS_DIR)
+
+SRC_DIR = srcs/
 
 SRC_LIST =	push_queue.c\
 			pop_queue.c\
@@ -46,16 +44,14 @@ FLAGS = -Wall -Wextra -Werror -c
 all: $(NAME)
 
 $(NAME): $(OBJ_DIR) $(OBJ)
-	mv $(LIBFT_A) .
 	ar rc $(NAME) $(OBJ)	
 	ranlib $(NAME)
-	mv $(NAME) $(LIB_DIR)
 
 $(OBJ_DIR):
 	mkdir $(OBJ_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS)
-	$(CC) $(FLAGS) $< -o $@
+	$(CC) $(FLAGS) $< $(INCLUDES) -o $@
 
 clean:
 	rm -Rf $(OBJ_DIR)

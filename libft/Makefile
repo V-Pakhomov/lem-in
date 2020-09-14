@@ -6,7 +6,7 @@
 #    By: rciera <rciera@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/09 20:27:55 by rciera            #+#    #+#              #
-#    Updated: 2020/09/01 09:02:54 by rciera           ###   ########.fr        #
+#    Updated: 2020/09/14 15:47:47 by rciera           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,14 @@ NAME = libft.a
 
 CC = gcc
 
-FT_PRINTF = ft_printf/
+FT_PRINTF_DIR = ft_printf/
+FT_PRINTF = $(FT_PRINTF_DIR)ft_printf.a
 
-FT_QUEUE = ft_queue/
+FT_QUEUE_DIR = ft_queue/
+FT_QUEUE = $(FT_QUEUE_DIR)ft_queue.a
 
-ARR_INT = array_int/
+ARR_INT_DIR = array_int/
+ARR_INT = $(ARR_INT_DIR)array_int.a
 
 HEADERS_DIR = includes/
 
@@ -26,7 +29,9 @@ HEADERS_LIST = libft.h
 
 HEADERS = $(addprefix $(HEADERS_DIR), $(HEADERS_LIST))
 
-SRC_DIR = src/
+INCLUDES = -I $(HEADERS_DIR)
+
+SRC_DIR = srcs/
 
 SRC_LIST =	ft_memset.c\
 			ft_bzero.c\
@@ -115,28 +120,39 @@ OBJ = $(addprefix $(OBJ_DIR), $(OBJ_LIST))
 
 FLAGS = -Wall -Wextra -Werror -c
 
-all: $(NAME)
+all: $(OBJ_DIR) $(FT_QUEUE) $(ARR_INT) $(FT_PRINTF) $(NAME)
 
-$(NAME): $(OBJ_DIR) $(OBJ)
-	ar rc $(NAME) $(OBJ)	
+$(ARR_INT):
+	make -C $(ARR_INT_DIR)
+
+$(FT_QUEUE):
+	make -C $(FT_QUEUE_DIR)
+
+$(FT_PRINTF):
+	make -C $(FT_PRINTF_DIR)
+
+$(NAME): $(OBJ)
+	ar rc $(NAME) $(OBJ) $(FT_QUEUE) $(FT_PRINTF) $(ARR_INT)
 	ranlib $(NAME)
-	make -C $(FT_PRINTF)
-	make -C $(FT_QUEUE)
-	make -C $(ARR_INT)
 
 $(OBJ_DIR):
-	mkdir $(OBJ_DIR)
+	mkdir -p $(OBJ_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADERS)
-	$(CC) $(FLAGS) $< -o $@
+	$(CC) $(FLAGS) $< $(INCLUDES) -o $@
 
 clean:
 	rm -Rf $(OBJ_DIR)
-	make -C $(FT_PRINTF) clean
-	make -C $(FT_QUEUE) clean
-	make -C $(ARR_INT) clean
+	make clean -C $(ARR_INT_DIR)
+	make clean -C $(FT_QUEUE_DIR)
+	make clean -C $(FT_PRINTF_DIR)
 
 fclean: clean
 	rm -f $(NAME)
+	rm -f $(ARR_INT)
+	rm -f $(FT_PRINTF)
+	rm -f $(FT_QUEUE)
 
 re: fclean all
+
+.PHONY: all clean fclean re
