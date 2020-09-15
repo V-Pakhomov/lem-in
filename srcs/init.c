@@ -8,6 +8,9 @@ void intialize_adjacency_list(t_lemin *lemin, t_link *links)
 
 	if (!(lemin->adj_list = (t_neighbor**)malloc(sizeof(t_neighbor*) * lemin->vertices)))
 		error_exit();
+	i = 0;
+	while (i < lemin->vertices)
+		lemin->adj_list[i++] = NULL;
 	while(links)
 	{
 		i = room_num(lemin, links->first);
@@ -28,7 +31,7 @@ t_link *new_link(char *first, char *last)
 		return (0);
 	new->first = ft_strdup(first);
 	new->last = ft_strdup(last);
-	new->next = 0;
+	new->next = NULL;
 	return(new);
 }
 
@@ -108,8 +111,6 @@ void	init_room_names_dict(t_room *rooms, t_lemin *lemin)
 	lemin->end = room_num(lemin, end);
 	if (lemin->start == -1 || lemin->end == -1)
 		error_exit();
-	if (start)
-		free(start);
-	if (end)
-		free(end);
+	free(start);
+	free(end);
 }
