@@ -9,6 +9,7 @@ void intialize_adjacency_list(t_lemin *lemin, t_link *links)
 	if (!(lemin->adj_list = (t_neighbor**)malloc(sizeof(t_neighbor*) * lemin->vertices)))
 		error_exit();
 	i = 0;
+	j = 0;
 	while (i < lemin->vertices)
 		lemin->adj_list[i++] = NULL;
 	while(links)

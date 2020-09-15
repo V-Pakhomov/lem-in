@@ -154,7 +154,7 @@ static int		result(int ret, char **str, const int fd, char **line)
 {
 	if (ret < 0)
 		return (-1);
-	else if (ret == 0 && (str[fd] == NULL || str[fd] == '\0'))
+	else if (ret == 0 && (str[fd] == NULL || str[fd] == 0))
 		return (0);
 	return (newline(fd, line, ret, str));
 }
