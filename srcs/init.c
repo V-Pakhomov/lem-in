@@ -108,6 +108,8 @@ void	init_room_names_dict(t_room *rooms, t_lemin *lemin)
 	lemin->end = room_num(lemin, end);
 	if (lemin->start == -1 || lemin->end == -1)
 		error_exit();
-	// free(start);
-	// free(end);
+	if (start)
+		free(start);
+	if (end)
+		free(end);
 }

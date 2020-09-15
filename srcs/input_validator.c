@@ -84,7 +84,8 @@ void	parse_input(t_lemin *lemin)
 		{
 			link = ft_strsplit(line, '-');
 			add_link(&links, link[0], link[1]);
-			// ft_arrayfree(link);
+			if (link)
+				ft_arrayfree(link);
 		}
 		else if (is_room(line) && check_dup_elem(line, rooms))
 		{
