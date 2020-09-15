@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:21:46 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/10 15:33:49 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/15 19:11:24 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,6 @@ void	bfs(t_lemin *lemin)
 			nghbr = nghbr->next;
 		}
 	}
+	while (!empty_queue(queue))
+		pop_queue(&queue);
 }

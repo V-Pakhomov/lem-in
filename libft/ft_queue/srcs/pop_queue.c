@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/02 18:21:40 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/02 18:28:28 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/15 19:10:26 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	pop_queue(t_queue **q)
 {
 	t_queue *tmp;
 
-	tmp = *q;
-	if (!tmp)
+	if (*q == NULL)
 		return ;
+	tmp = *q;
 	tmp = tmp->next;
 	free(*q);
 	*q = tmp;
