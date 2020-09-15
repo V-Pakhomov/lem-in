@@ -109,10 +109,11 @@ void	parse_input(t_lemin *lemin)
 	intialize_adjacency_list(lemin, links);
 }
 
-int main(void)
+int main(int argc, char **argv)
 {
 	t_lemin lemin;
-
+	if (argc > 1 && argv)
+		error_exit();
 	parse_input(&lemin);
 	//print_lemin(&lemin);
 	edmonds_karp(&lemin);
