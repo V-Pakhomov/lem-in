@@ -1,120 +1,96 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input_validator.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/16 17:11:34 by rciera            #+#    #+#             */
+/*   Updated: 2020/09/16 18:34:21 by rciera           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
-int rooms_exists(t_room *rooms, t_link *links)
+static void	check_links(t_lemin *lemin)
 {
-	t_room *ptr;
-	int first_ok;
-	int last_ok;
+	t_link *link;
 
-	first_ok = 0;
-	last_ok = 0;
-
-	ptr = rooms;
-	while(ptr != 0)
+	link = lemin->links;
+	while (link)
 	{
-		if (ft_strequ(ptr->name, links->first))
-			first_ok++;
-		if (ft_strequ(ptr->name, links->last))
-			last_ok++;
-		ptr = ptr->next;
+		if (room_num(lemin, link->first) == -1 ||
+			room_num(lemin, link->last) == -1)
+			error_exit();
+		link = link->next;
 	}
-	if (first_ok && last_ok)
-		return (1);
-	return(0);
 }
 
-int final_validation(t_room *rooms, t_link *links, t_lemin *lemin)
+static int	handle_line(char *line, t_link **links, t_room **rooms, int *cmd)
 {
-	int counter = 0;
-	int counter_2 = 0;
-	int start_existing_flag = 0;
-	int end_existing_flag = 0;
-	if (lemin->ants <= 0)
-		error_exit();
-	t_room *ptr = rooms;
-	t_link *lnk = links;
-	while(ptr != 0)
-	{
-		if (ptr->is_cmd == 1)
-			start_existing_flag++;
-		if (ptr->is_cmd == 2)
-			end_existing_flag++;
-		ptr = ptr->next;
-		counter++;
-	}
-	while(lnk != 0)
-	{
-		if (!rooms_exists(rooms, lnk))
-			return(0);
-		lnk = lnk->next;
-		counter_2++;
-	}
-	if (!counter || !counter_2 ||
-			start_existing_flag != 1 || end_existing_flag != 1)
+	char **link;
+
+	if (is_comment(line))
 		return (0);
-	return(1);
+	if (is_room(line) && check_dup_elem(line, *rooms))
+	{
+		add_room(rooms, line, *cmd);
+		*cmd = 0;
+		return (1);
+	}
+	if (is_link(line))
+	{
+		link = ft_strsplit(line, '-');
+		add_link(links, link[0], link[1]);
+		ft_arrayfree(link);
+	}
+	else if (ft_strequ("##start", line))
+		*cmd = 1;
+	else if (ft_strequ("##end", line))
+		*cmd = 2;
+	else
+		error_exit();
+	return (0);
 }
 
-void	parse_input(t_lemin *lemin)
+void		parse_input(t_lemin *lemin)
 {
-	char	*line = 0;
-	int fd;
-	t_room *rooms;
-	t_link *links;
-	char **link = 0;
-	int cmd_flag;
+	char	*line;
+	t_room	*rooms;
+	t_link	*links;
+	int		cmd_flag;
 
-	fd = 0;
 	rooms = 0;
 	links = 0;
 	lemin->vertices = 0;
 	lemin->links = 0;
 	cmd_flag = 0;
-	if (get_next_line(fd, &line) && ft_isinteger(line))
+	if (get_next_line(0, &line) && ft_isinteger(line))
 		lemin->ants = ft_atoi(line);
 	else
 		error_exit();
 	free(line);
-	while (get_next_line(fd, &line))
+	while (get_next_line(0, &line))
 	{
-		if (is_comment(line))
-		{
-		}
-		else if (is_link(line))
-		{
-			link = ft_strsplit(line, '-');
-			add_link(&links, link[0], link[1]);
-			ft_arrayfree(link);
-		}
-		else if (is_room(line) && check_dup_elem(line, rooms))
-		{
-			add_room(&rooms, line, cmd_flag);
-			lemin->vertices++;
-			cmd_flag = 0;
-		}
-		else if (ft_strequ("##start", line))
-			cmd_flag = 1;
-		else if (ft_strequ("##end", line))
-			cmd_flag = 2;
-		else
-			error_exit();
+		lemin->vertices += handle_line(line, &links, &rooms, &cmd_flag);
 		if (line)
 			free(line);
 	}
 	lemin->links = links;
 	lemin->rooms_raw = rooms;
-	if (!final_validation(rooms, links, lemin))
-		error_exit();
-	init_room_names_dict(rooms, lemin);
-	intialize_adjacency_list(lemin, links);
 }
 
-int main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	t_lemin lemin;
+
 	if (argc > 1 && argv)
 		error_exit();
 	parse_input(&lemin);
-	//print_lemin(&lemin);
+	if (lemin.ants <= 0 || lemin.vertices == 0 || lemin.links == NULL)
+		error_exit();
+	init_room_names_dict(&lemin);
+	check_links(&lemin);
+	intialize_adjacency_list(&lemin);
 	edmonds_karp(&lemin);
 }

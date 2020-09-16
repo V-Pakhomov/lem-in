@@ -1,14 +1,27 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   temp_helpful.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/16 18:57:06 by rciera            #+#    #+#             */
+/*   Updated: 2020/09/16 18:58:14 by rciera           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
-void print_matrix(int **m, int size)
+void	print_matrix(int **m, int size)
 {
-	int i = 0;
-	int j = 0;
+	int i;
+	int j;
 
-	while(i < size)
+	i = 0;
+	while (i < size)
 	{
 		j = 0;
-		while(j < size)
+		while (j < size)
 		{
 			ft_printf("%d  ", m[i][j]);
 			j++;
@@ -18,22 +31,24 @@ void print_matrix(int **m, int size)
 	}
 }
 
-void print_links(t_link *links)
+void	print_links(t_link *links)
 {
-	t_link *l = 0;
+	t_link *l;
+
 	l = links;
-	while(l != 0)
+	while (l != 0)
 	{
 		ft_printf("%s  --  %s\n", l->first, l->last);
 		l = l->next;
 	}
 }
 
-void print_lst_of_rooms(char **rooms)
+void	print_lst_of_rooms(char **rooms)
 {
-	int i = 0;
+	int i;
 
-	while(rooms[i] != 0)
+	i = 0;
+	while (rooms[i] != 0)
 	{
 		ft_printf("[%d : %s]\n", i, rooms[i]);
 		i++;

@@ -6,7 +6,7 @@
 #    By: rciera <rciera@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/01 08:43:18 by rciera            #+#    #+#              #
-#    Updated: 2020/09/14 18:45:55 by rciera           ###   ########.fr        #
+#    Updated: 2020/09/16 17:04:10 by rciera           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ INCLUDES = -I ./includes/ -I libft/includes/
 
 SOURCES = input_validator.c \
 		init.c \
+		addition_rooms_and_links.c \
 		temp_helpful.c \
 		checkers.c \
 		bin_search.c \

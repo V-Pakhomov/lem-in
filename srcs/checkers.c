@@ -1,36 +1,53 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   checkers.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/09/16 16:52:11 by rciera            #+#    #+#             */
+/*   Updated: 2020/09/16 18:17:32 by rciera           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lemin.h"
 
-int is_comment(char *s)
+int		is_comment(char *s)
 {
 	return (s[0] == '#' && s[1] != '#');
 }
 
-int is_cmd(char *s)
+int		is_cmd(char *s)
 {
 	return (ft_strequ(s, "##start") || ft_strequ(s, "##end"));
 }
 
-int is_room(char *s)
+int		is_room(char *s)
 {
-	char **s_for_inspect;
-	int res;
+	char	**s_for_inspect;
+	int		res;
 
 	s_for_inspect = ft_strsplit(s, ' ');
 	res = 0;
-	if (s_for_inspect[0][0] == '#' || s_for_inspect[0][1] == 'L' || ft_strchr(s_for_inspect[0], '-'))
+	if (s_for_inspect[0][0] == '#' ||
+		s_for_inspect[0][1] == 'L' ||
+		ft_strchr(s_for_inspect[0], '-'))
 		res = 0;
 	else
 		res = 1;
-	res &= (ft_arraylen(s_for_inspect) == 3 && ft_isinteger(s_for_inspect[1]) && ft_isinteger(s_for_inspect[2]));
+	res &= (ft_arraylen(s_for_inspect) == 3);
+	if (!res)
+		return (0);
+	res &= ft_isinteger(s_for_inspect[1]);
+	res &= ft_isinteger(s_for_inspect[2]);
 	ft_arrayfree(s_for_inspect);
 	return (res);
 }
 
-
-int is_link(char *s)
+int		is_link(char *s)
 {
-	char **s_for_inspect;
-	int res;
+	char	**s_for_inspect;
+	int		res;
 
 	s_for_inspect = ft_strsplit(s, '-');
 	res = (ft_arraylen(s_for_inspect) == 2);
@@ -38,28 +55,23 @@ int is_link(char *s)
 	return (res);
 }
 
-
-int check_dup_elem(char *line, t_room *rooms)
+int		check_dup_elem(char *line, t_room *rooms)
 {
-	t_room *ptr;
-	char **room;
+	t_room	*ptr;
+	char	**room;
 
-	room = 0;
 	room = ft_strsplit(line, ' ');
-
 	ptr = rooms;
-	while(ptr != 0)
+	while (ptr)
 	{
-		if (ptr->name == room[0] || (ptr->x == ft_atoi(room[1]) && ptr->y == ft_atoi(room[2])))
+		if (ptr->name == room[0] ||
+			(ptr->x == ft_atoi(room[1]) && ptr->y == ft_atoi(room[2])))
 		{
 			ft_arrayfree(room);
-			room = 0;
 			error_exit();
-			return(0);
 		}
 		ptr = ptr->next;
 	}
 	ft_arrayfree(room);
-	room = 0;
-	return(1);
+	return (1);
 }
