@@ -25,8 +25,13 @@ if ants == 'Error':
 	print(ants)
 	exit(1)
 G = nx.Graph()
+vertices = 0
 for line in sys.stdin:
 	if is_room(line):
+		vertices += 1
+		if vertices > 1000:
+			print('To many vertices')
+			exit(1)
 		G.add_node(line.split()[0])
 	elif is_link(line):
 		G.add_edge(line.split('-')[0],line.split('-')[1])
