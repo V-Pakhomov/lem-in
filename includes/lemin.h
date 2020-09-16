@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/16 17:59:16 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/16 19:20:11 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,6 @@ int				is_neighbor(t_lemin *lemin, int n, int m);
 ** TO DO: refactor and sort
 */
 void			intialize_adjacency_list(t_lemin *lemin);
-// t_link			*new_link(char *first, char *last);
-// t_room			*new_room(char **room, int cmd_flag);
 void			add_room(t_room **all_lst, char *name, int cmd_flag);
 void			add_link(t_link **all_lst, char *first, char *last);
 

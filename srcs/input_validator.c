@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:11:34 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/16 18:34:21 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/16 19:19:29 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,26 @@ static void	check_links(t_lemin *lemin)
 	}
 }
 
+static void	check_repeating_rooms(t_lemin *lemin)
+{
+	int i;
+
+	i = 1;
+	while (i < lemin->vertices)
+	{
+		if (ft_strequ(lemin->rooms[i], lemin->rooms[i - 1]))
+			error_exit();
+		i++;
+	}
+}
+
 static int	handle_line(char *line, t_link **links, t_room **rooms, int *cmd)
 {
 	char **link;
 
 	if (is_comment(line))
 		return (0);
-	if (is_room(line) && check_dup_elem(line, *rooms))
+	if (is_room(line)/* && check_dup_elem(line, *rooms)*/)
 	{
 		add_room(rooms, line, *cmd);
 		*cmd = 0;
@@ -90,6 +103,7 @@ int			main(int argc, char **argv)
 	if (lemin.ants <= 0 || lemin.vertices == 0 || lemin.links == NULL)
 		error_exit();
 	init_room_names_dict(&lemin);
+	check_repeating_rooms(&lemin);
 	check_links(&lemin);
 	intialize_adjacency_list(&lemin);
 	edmonds_karp(&lemin);
