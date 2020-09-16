@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 16:25:44 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/15 19:14:16 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/16 16:50:01 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,36 +38,34 @@ static int	printable(t_lemin *lemin, int line)
 	return (was_printed);
 }
 
-void prnt_lst_links(t_link *links)
+void		prnt_lst_links(t_link *links)
 {
 	t_link *ptr;
 
 	ptr = links;
-	while(ptr != 0)
+	while (ptr != 0)
 	{
 		ft_printf("%s-%s\n", ptr->first, ptr->last);
 		ptr = ptr->next;
 	}
 }
 
-void prnt_lst_rooms(t_room *rooms)
+void		prnt_lst_rooms(t_room *rooms)
 {
 	t_room *ptr;
 
 	ptr = rooms;
-	while(ptr != 0)
-	{
-	if (ptr != 0)
+	while (ptr)
 	{
 		ft_printf("%s %d %d\n", ptr->name, ptr->x, ptr->y);
 		ptr = ptr->next;
 	}
-   }
 }
 
 void		print_output(t_lemin *lemin)
 {
 	int line;
+
 	ft_printf("%d\n", lemin->ants);
 	prnt_lst_rooms(lemin->rooms_raw);
 	prnt_lst_links(lemin->links);

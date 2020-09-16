@@ -6,12 +6,12 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/04 19:54:07 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/02 17:16:43 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/16 16:24:08 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VISUALISATION_H
-# define VISUALISATION_H
+#ifndef COLORS_H
+# define COLORS_H
 
 # include <time.h>
 # include <sys/times.h>

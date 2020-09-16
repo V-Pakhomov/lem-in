@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   bin_search.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:53:13 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/15 15:51:58 by admin            ###   ########.fr       */
+/*   Updated: 2020/09/16 16:30:50 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-int room_num(t_lemin *lemin, char *key)
+int		room_num(t_lemin *lemin, char *key)
 {
 	int l;
 	int m;

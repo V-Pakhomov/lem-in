@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:20:42 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/03 13:38:31 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/16 16:45:17 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,5 @@ static void		push_path(t_lemin *lemin, t_path *new)
 void			refresh_paths(t_lemin *lemin)
 {
 	lemin->num_of_paths++;
-	// lemin->path_len[lemin->end] + 1;
 	push_path(lemin, new_path(lemin));
 }

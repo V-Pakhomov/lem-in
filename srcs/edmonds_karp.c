@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:15:14 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/10 15:52:47 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/16 16:48:02 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,9 @@ static void	reset_arrays_for_bfs(t_lemin *lemin)
 
 static void	delete_vericies(t_lemin *lemin)
 {
-	t_neighbor *nghbr;
-	int i;
-	int j;
+	t_neighbor	*nghbr;
+	int			i;
+	int			j;
 
 	i = lemin->parent[lemin->end];
 	while (i != lemin->start)

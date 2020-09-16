@@ -6,21 +6,21 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/21 13:41:51 by rciera            #+#    #+#             */
-/*   Updated: 2020/08/25 19:11:50 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/16 16:47:20 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static void recoursive(t_lemin *lemin, int left, int right)
+static void	recoursive(t_lemin *lemin, int left, int right)
 {
-	int l;
-	int r;
-	char *m;
-	char *tmp;
+	int		l;
+	int		r;
+	char	*m;
+	char	*tmp;
 
 	if (left >= right)
-		return;
+		return ;
 	m = lemin->rooms[(left + right) / 2];
 	l = left;
 	r = right;
@@ -33,17 +33,15 @@ static void recoursive(t_lemin *lemin, int left, int right)
 		if (r >= l)
 		{
 			tmp = lemin->rooms[l];
-			lemin->rooms[l] = lemin->rooms[r];
-			lemin->rooms[r] = tmp;
-			l++;
-			r--;
+			lemin->rooms[l++] = lemin->rooms[r];
+			lemin->rooms[r--] = tmp;
 		}
 	}
 	recoursive(lemin, left, r);
 	recoursive(lemin, l, right);
 }
 
-void ft_qsort(t_lemin *lemin)
+void		ft_qsort(t_lemin *lemin)
 {
 	recoursive(lemin, 0, lemin->vertices - 1);
 }

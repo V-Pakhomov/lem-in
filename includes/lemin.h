@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/14 18:46:02 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/16 16:29:39 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,25 @@ typedef struct	s_path
 	struct s_path	*next;
 }				t_path;
 
-typedef struct s_link
+typedef struct	s_link
 {
-	char *first;
-	char *last;
-	struct s_link *next;
+	char			*first;
+	char			*last;
+	struct s_link	*next;
 }				t_link;
 
-typedef struct s_room
+/*
+** is_cmd
+** 1 - start
+** 2 - end
+*/
+typedef struct	s_room
 {
-	char	*name;
-	int		x;
-	int		y;
-	int		is_cmd;			//1 - start, 2 - end
-	struct	s_room *next;
+	char			*name;
+	int				x;
+	int				y;
+	int				is_cmd;
+	struct s_room	*next;
 
 }				t_room;
 
@@ -59,12 +64,11 @@ typedef struct	s_lemin
 	int			*parent;
 	int			*path_len;
 	int			max_path_len;
-	int 		num_of_paths;
+	int			num_of_paths;
 	t_path		*path;
 	t_link		*links;
 	t_room		*rooms_raw;
 }				t_lemin;
-
 
 /*
 ** qsort.c
@@ -110,7 +114,7 @@ void			print_bfs_info(t_lemin *lemin);
 */
 void			print_output(t_lemin *lemin);
 void			start_and_finish_are_connected(t_lemin *lemin);
-void prnt_lst_rooms(t_room *rooms);
+void			prnt_lst_rooms(t_room *rooms);
 
 /*
 ** t_neighbors.c
@@ -119,30 +123,27 @@ void			add_neighbor(t_neighbor **neighbor, int n);
 void			delete_neighbor(t_neighbor **neighbor, int n);
 int				is_neighbor(t_lemin *lemin, int n, int m);
 
-
-
-
 /*
 ** validation and input parsing
 ** TO DO: refactor and sort
 */
-void intialize_adjacency_list(t_lemin *lemin, t_link *links);
-t_link *new_link(char *first, char *last);
-t_room *new_room(char **room, int cmd_flag);
-void add_room(t_room **all_lst, char *name, int cmd_flag);
-void add_link(t_link **all_lst, char *first, char *last);
+void			intialize_adjacency_list(t_lemin *lemin, t_link *links);
+t_link			*new_link(char *first, char *last);
+t_room			*new_room(char **room, int cmd_flag);
+void			add_room(t_room **all_lst, char *name, int cmd_flag);
+void			add_link(t_link **all_lst, char *first, char *last);
 
-int is_comment(char *s);
-int is_cmd(char *s);
-int is_room(char *s);
-int is_link(char *s);
-void parse_input(t_lemin *lemin);
+int				is_comment(char *s);
+int				is_cmd(char *s);
+int				is_room(char *s);
+int				is_link(char *s);
+void			parse_input(t_lemin *lemin);
 
-void print_matrix(int **m, int size);
-void print_links(t_link *links);
-void print_lst_of_rooms(char **rooms);
+void			print_matrix(int **m, int size);
+void			print_links(t_link *links);
+void			print_lst_of_rooms(char **rooms);
 
-void	init_room_names_dict(t_room *rooms, t_lemin *lemin);
-int check_dup_elem(char *line, t_room *rooms);
+void			init_room_names_dict(t_room *rooms, t_lemin *lemin);
+int				check_dup_elem(char *line, t_room *rooms);
 
 #endif
