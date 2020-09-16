@@ -29,13 +29,13 @@ vertices = 0
 for line in sys.stdin:
 	if is_room(line):
 		vertices += 1
-		if vertices > 1000:
+		if vertices > 1010:
 			print('To many vertices')
 			exit(1)
 		G.add_node(line.split()[0])
 	elif is_link(line):
 		G.add_edge(line.split('-')[0],line.split('-')[1])
-nx.draw_kamada_kawai(G, node_color='black',edge_color='b', node_size=30, width=0.15)
+nx.draw_kamada_kawai(G, node_color='black',edge_color='b', node_size=20, width=0.1)
 # nx.draw_spring(G, node_color='black',edge_color='b', node_size = 30)
 # nx.draw_circular(G, node_color='black',edge_color='b', node_size = 30)
 # nx.draw_random(G, node_color='black',edge_color='b', node_size = 30)
