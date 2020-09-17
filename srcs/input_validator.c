@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_validator.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:11:34 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/16 19:19:29 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/18 00:09:18 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,10 +45,10 @@ static int	handle_line(char *line, t_link **links, t_room **rooms, int *cmd)
 
 	if (is_comment(line))
 		return (0);
-	if (is_room(line)/* && check_dup_elem(line, *rooms)*/)
+	if (is_room(line))
 	{
 		add_room(rooms, line, *cmd);
-		*cmd = 0;
+		*cmd &= 4;
 		return (1);
 	}
 	if (is_link(line))
@@ -58,9 +58,9 @@ static int	handle_line(char *line, t_link **links, t_room **rooms, int *cmd)
 		ft_arrayfree(link);
 	}
 	else if (ft_strequ("##start", line))
-		*cmd = 1;
+		*cmd = (*cmd) |= 1;
 	else if (ft_strequ("##end", line))
-		*cmd = 2;
+		*cmd = (*cmd) |= 2;
 	else
 		error_exit();
 	return (0);
@@ -78,14 +78,15 @@ void		parse_input(t_lemin *lemin)
 	lemin->vertices = 0;
 	lemin->links = 0;
 	cmd_flag = 0;
-	if (get_next_line(0, &line) && ft_isinteger(line))
-		lemin->ants = ft_atoi(line);
-	else
-		error_exit();
-	free(line);
 	while (get_next_line(0, &line))
 	{
-		lemin->vertices += handle_line(line, &links, &rooms, &cmd_flag);
+		if (ft_isinteger(line) && !(cmd_flag & (1 << 2)))
+		{
+			lemin->ants = ft_atoi(line);
+			cmd_flag |= 4;
+		}
+		else
+			lemin->vertices += handle_line(line, &links, &rooms, &cmd_flag);
 		if (line)
 			free(line);
 	}

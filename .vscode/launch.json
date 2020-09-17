@@ -5,6 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "(lldb) Запустить",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/lem-in",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": true,
+            "MIMode": "lldb"
+        },
+        {
             "name": "gcc-9 - Failed to load message bundle. See console for details.",
             "type": "cppdbg",
             "request": "launch",
@@ -15,7 +27,7 @@
             "environment": [],
             "externalConsole": true,
             "MIMode": "gdb",
-            "miDebuggerPath": "/usr/bin/gdb"
+            //"miDebuggerPath": "/usr/bin/gdb"
         }
     ]
 }

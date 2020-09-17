@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   addition_rooms_and_links.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:00:49 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/16 17:03:06 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/18 00:08:55 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ static t_room	*new_room(char **room, int cmd_flag)
 		return (0);
 	new->name = ft_strdup(room[0]);
 	new->next = 0;
-	new->is_cmd = cmd_flag;
+	if (cmd_flag & 1)
+		new->is_cmd = 1;
+	if (cmd_flag & (1 << 1))
+		new->is_cmd = 2;
 	new->x = ft_atoi(room[1]);
 	new->y = ft_atoi(room[2]);
 	return (new);

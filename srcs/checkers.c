@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checkers.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:52:11 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/16 18:17:32 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/17 22:25:28 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		is_comment(char *s)
 {
-	return (s[0] == '#' && s[1] != '#');
+	return (s[0] == '#' && !ft_strequ("##start", s) && !ft_strequ("##end", s));
 }
 
 int		is_cmd(char *s)
@@ -37,7 +37,10 @@ int		is_room(char *s)
 		res = 1;
 	res &= (ft_arraylen(s_for_inspect) == 3);
 	if (!res)
+	{
+		ft_arrayfree(s_for_inspect);
 		return (0);
+	}
 	res &= ft_isinteger(s_for_inspect[1]);
 	res &= ft_isinteger(s_for_inspect[2]);
 	ft_arrayfree(s_for_inspect);

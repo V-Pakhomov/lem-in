@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rciera <rciera@student.42.fr>              +#+  +:+       +#+         #
+#    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/01 08:43:18 by rciera            #+#    #+#              #
-#    Updated: 2020/09/16 17:04:10 by rciera           ###   ########.fr        #
+#    Updated: 2020/09/18 00:04:30 by admin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,6 @@ SRC = $(addprefix $(SRCDIR)/, $(SOURCES))
 OBJ = $(addprefix $(OBJDIR)/, $(SOURCES:.c=.o))
 
 CCFL = -Wall -Wextra -Werror -g
-
 
 
 all: obj_dir library $(ARCHIVE) $(NAME)
