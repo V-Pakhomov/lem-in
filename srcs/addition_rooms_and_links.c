@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   addition_rooms_and_links.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:00:49 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/18 00:08:55 by admin            ###   ########.fr       */
+/*   Updated: 2020/09/18 19:37:30 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static t_room	*new_room(char **room, int cmd_flag)
 	if (!(new = (t_room *)malloc(sizeof(t_room))))
 		return (0);
 	new->name = ft_strdup(room[0]);
-	new->next = 0;
+	new->next = NULL;
 	if (cmd_flag & 1)
 		new->is_cmd = 1;
 	if (cmd_flag & (1 << 1))

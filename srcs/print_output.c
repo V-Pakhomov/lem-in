@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 16:25:44 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/16 21:38:36 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/18 19:27:20 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,10 @@ void		prnt_lst_rooms(t_room *rooms)
 	ptr = rooms;
 	while (ptr)
 	{
+		if (ptr->is_cmd == 1)
+			ft_printf("##start\n");
+		else if (ptr->is_cmd == 2)
+			ft_printf("##end\n");
 		ft_printf("%s %d %d\n", ptr->name, ptr->x, ptr->y);
 		ptr = ptr->next;
 	}
