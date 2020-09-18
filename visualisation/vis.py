@@ -74,6 +74,12 @@ def print_graph(iter):
 	nx.draw_networkx_nodes(G, pos, node_color=[colors[x] for x in colors.keys()], alpha=0.5, node_size=300)
 	nx.draw_networkx_edges(G, pos, width=0.5, edge_color='b', alpha=0.5)
 	nx.draw_networkx_labels(G, pos, labels=node_labels)
+	if iter >= 0 and iter < len(commands):
+		for cmd in commands[iter]:
+			ant = cmd.split('-')[0][1:]
+			room = cmd.split('-')[1]
+			if room != end_room[0]:
+				node_labels[room] = ''
 	
 
 ants = input()
