@@ -27,6 +27,7 @@ def read_stdin():
 				colors[room] = 'green'
 				node_labels[room] = 'start'
 			elif end:
+				end_room.append(room)
 				node_labels[room] = 'end'
 				colors[room] = 'red'
 			else:
@@ -60,44 +61,33 @@ def is_link(line):
 		return False
 	return len(line.split('-')) == 2
 
-
-def print_graph():
-	pos = nx.kamada_kawai_layout(G)
-	for node in G.nodes():
-		nx.draw_networkx_nodes(G, pos, [node], node_color=colors[node], alpha=0.5, node_size=300)
+def print_graph(iter):
+	ax.clear()
+	iter -= 1
+	if iter >= 0 and iter < len(commands):
+		for cmd in commands[iter]:
+			ant = cmd.split('-')[0][1:]
+			room = cmd.split('-')[1]
+			if room != end_room[0]:
+				node_labels[room] = str(ant)
+				colors[room] = 'blue'
+	nx.draw_networkx_nodes(G, pos, node_color=[colors[x] for x in colors.keys()], alpha=0.5, node_size=300)
 	nx.draw_networkx_edges(G, pos, width=0.5, edge_color='b', alpha=0.5)
 	nx.draw_networkx_labels(G, pos, labels=node_labels)
-	plt.axis('off')
-	plt.show()
-
-
-def refresh_graph(G, colors, labels, commands):
-	pos = nx.kamada_kawai_layout(G)
-	for com in commands:
-		ant = com.split('-')[0][1:]
-		room = com.split('-')[1]
-		labels[room] = str(ant)
-		colors[room] = 'blue'
-	nx.relabel_nodes(G, labels)
-	plt.axis('off')
-	plt.show()
-
-
-def update(iter):
-	pass
 	
 
 ants = input()
 if ants == 'ERROR':
 	print(ants)
 	exit(1)
-fig = plt.figure(figsize=(20,12))
+fig, ax = plt.subplots(figsize=(20,12))
+plt.axis('off')
 G = nx.Graph()
 colors = {}
 node_labels = {}
 commands = []
+end_room = []
 read_stdin()
-# anim = animation.FuncAnimation(fig, update, frames=len(commands)+2, interval=1000, repeat=False)
-# plt.show()
-print_graph()
-#refresh_graph(G, colors, node_labels, ['L1-14', 'L2-0', 'L3-2', 'L4-1'])
+pos = nx.fruchterman_reingold_layout(G)
+anim = animation.FuncAnimation(fig, print_graph, frames=len(commands)+2, interval=1000, repeat=False)
+plt.show()
