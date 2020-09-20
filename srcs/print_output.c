@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_output.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 16:25:44 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/18 19:27:20 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/20 16:09:13 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,17 +66,30 @@ void		prnt_lst_rooms(t_room *rooms)
 	}
 }
 
+static void p_input(t_input *in)
+{
+	t_input *p = in;
+	while(p->next != 0)
+	{
+		p = p->next;
+	}
+	while(p != 0)
+	{
+		ft_printf("%s\n", p->line);
+		p = p->prev;
+	}
+	ft_printf("\n");
+}
+
 void		print_output(t_lemin *lemin)
 {
 	int line;
 
-	ft_printf("%d\n", lemin->ants);
-	prnt_lst_rooms(lemin->rooms_raw);
-	prnt_lst_links(lemin->links);
+	p_input(lemin->input_raw);
 	line = 0;
 	while (printable(lemin, line++))
 		ft_printf("\n");
-	ft_printf("It took %d moves\n", line - 1);
+	//ft_printf("It took %d moves\n", line - 1);
 	exit(0);
 }
 

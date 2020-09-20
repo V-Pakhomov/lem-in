@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 17:33:03 by rciera            #+#    #+#             */
-/*   Updated: 2020/03/12 20:32:49 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/20 01:00:11 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strdup(const char *str)
 	char	*newstr;
 	size_t	i;
 
-	if (str == NULL)
+	if (!str)
 		return (NULL);
 	if (!(newstr = (char *)malloc(sizeof(char) * (ft_strlen(str) + 1))))
 		return (NULL);

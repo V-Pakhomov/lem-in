@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/07 17:20:37 by rciera            #+#    #+#             */
-/*   Updated: 2020/03/11 19:30:02 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/20 01:00:17 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ size_t		ft_strlen(const char *str)
 {
 	size_t len;
 
-	if (str == NULL)
+	if (!str)
 		return (0);
 	len = 0;
 	while (str[len] != '\0')

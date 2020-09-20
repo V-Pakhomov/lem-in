@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   addition_rooms_and_links.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:00:49 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/18 19:37:30 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/20 17:16:17 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,18 @@ static t_link	*new_link(char *first, char *last)
 	return (new);
 }
 
+static t_input	*new_input(char *line)
+{
+	t_input *new;
+
+	if (!(new = (t_input *)malloc(sizeof(t_input))))
+		return (0);
+	new->line = ft_strdup(line);
+	new->next = NULL;
+	new->prev = NULL;
+	return (new);
+}
+
 static t_room	*new_room(char **room, int cmd_flag)
 {
 	t_room	*new;
@@ -32,6 +44,7 @@ static t_room	*new_room(char **room, int cmd_flag)
 		return (0);
 	new->name = ft_strdup(room[0]);
 	new->next = NULL;
+	new->is_cmd = 0;
 	if (cmd_flag & 1)
 		new->is_cmd = 1;
 	if (cmd_flag & (1 << 1))
@@ -63,8 +76,6 @@ void			add_link(t_link **all_lst, char *first, char *last)
 {
 	t_link	*new;
 
-	if (ft_strequ(first, last))
-		return ;
 	new = new_link(first, last);
 	if (*all_lst == NULL)
 	{
@@ -73,4 +84,21 @@ void			add_link(t_link **all_lst, char *first, char *last)
 	}
 	new->next = *all_lst;
 	*all_lst = new;
+}
+
+void			add_input(t_input **all_input, char *line)
+{
+	t_input	*new;
+
+	new = new_input(line);
+	if (*all_input == NULL)
+	{
+		*all_input = new;
+		return ;
+	}
+	new->next = *all_input;
+	(*all_input)->prev = new;
+	*all_input = new;
+	//all_input = &start;
+	//*all_input = new;
 }

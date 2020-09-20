@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/16 19:20:11 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/20 15:37:43 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,13 @@ typedef struct	s_room
 
 }				t_room;
 
+typedef struct		s_input
+{
+	char			*line;
+	struct s_input	*next;
+	struct s_input	*prev;
+}					t_input;
+
 typedef struct	s_neighbor
 {
 	int					room;
@@ -68,6 +75,7 @@ typedef struct	s_lemin
 	t_path		*path;
 	t_link		*links;
 	t_room		*rooms_raw;
+	t_input		*input_raw;
 }				t_lemin;
 
 /*
@@ -130,6 +138,7 @@ int				is_neighbor(t_lemin *lemin, int n, int m);
 void			intialize_adjacency_list(t_lemin *lemin);
 void			add_room(t_room **all_lst, char *name, int cmd_flag);
 void			add_link(t_link **all_lst, char *first, char *last);
+void			add_input(t_input **all_input, char *line);
 
 int				is_comment(char *s);
 int				is_cmd(char *s);
