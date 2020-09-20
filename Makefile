@@ -6,7 +6,7 @@
 #    By: admin <admin@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/09/01 08:43:18 by rciera            #+#    #+#              #
-#    Updated: 2020/09/18 00:04:30 by admin            ###   ########.fr        #
+#    Updated: 2020/09/20 22:43:04 by admin            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,9 @@ SOURCES = input_validator.c \
 		error.c \
 		print_output.c \
 		t_neighbors.c \
-		file_to_debug.c
+		file_to_debug.c \
+		extra_checker.c \
+		input_addition.c
 
 SRCDIR = srcs
 OBJDIR = obj

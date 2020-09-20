@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 16:25:44 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/20 16:09:13 by admin            ###   ########.fr       */
+/*   Updated: 2020/09/20 22:44:13 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,21 +64,6 @@ void		prnt_lst_rooms(t_room *rooms)
 		ft_printf("%s %d %d\n", ptr->name, ptr->x, ptr->y);
 		ptr = ptr->next;
 	}
-}
-
-static void p_input(t_input *in)
-{
-	t_input *p = in;
-	while(p->next != 0)
-	{
-		p = p->next;
-	}
-	while(p != 0)
-	{
-		ft_printf("%s\n", p->line);
-		p = p->prev;
-	}
-	ft_printf("\n");
 }
 
 void		print_output(t_lemin *lemin)

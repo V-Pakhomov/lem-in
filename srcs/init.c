@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:58:39 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/18 19:13:44 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/20 22:41:42 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,28 @@ void		init_room_names_dict(t_lemin *lemin)
 		rooms = rooms->next;
 	}
 	init_start_and_end(lemin, &start, &end);
+}
+
+t_lemin		*lemin_init(void)
+{
+	t_lemin *out;
+
+	if (!(out = (t_lemin *)malloc(sizeof(t_lemin))))
+		error_exit();
+	out->links = 0;
+	out->max_path_len = 0;
+	out->num_of_paths = 0;
+	out->parent = 0;
+	out->path = 0;
+	out->path_len = 0;
+	out->rooms = 0;
+	out->rooms = 0;
+	out->start = 0;
+	out->used = 0;
+	out->vertices = 0;
+	out->adj_list = 0;
+	out->ants = 0;
+	out->end = 0;
+	out->input_raw = 0;
+	return (out);
 }

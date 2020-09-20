@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/20 15:37:43 by admin            ###   ########.fr       */
+/*   Updated: 2020/09/20 22:44:41 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,5 +152,10 @@ void			print_lst_of_rooms(char **rooms);
 
 void			init_room_names_dict(t_lemin *lemin);
 int				check_dup_elem(char *line, t_room *rooms);
+
+t_lemin			*lemin_init();
+void			check_links(t_lemin *lemin);
+void			check_repeating_rooms(t_lemin *lemin);
+void			p_input(t_input *in);
 
 #endif
