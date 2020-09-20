@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:11:34 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/20 17:06:29 by admin            ###   ########.fr       */
+/*   Updated: 2020/09/20 18:21:55 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ static int	handle_line(char *line, t_link **links, t_room **rooms, int *cmd)
 		error_exit();
 	return (0);
 }
-
-
 
 void input_free(t_input **in)
 {
@@ -217,7 +215,7 @@ int			main(int argc, char **argv)
 		error_exit();
 	init_room_names_dict(lemin);
 	check_repeating_rooms(lemin);
-	check_repeating_pipes(lemin);
+	//check_repeating_pipes(lemin);
 	check_links(lemin);
 	intialize_adjacency_list(lemin);
 	edmonds_karp(lemin);
