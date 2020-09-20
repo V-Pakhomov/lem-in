@@ -11,6 +11,8 @@ def read_stdin():
 	start = False
 	end = False
 	for line in sys.stdin:
+		if len(line) < 2 or (line[0] == '#' and line[1] != '#'):
+			continue
 		if line[-1] == '\n':
 			line = line[:-1]
 		if line == '##start' or line == '##end':
@@ -80,7 +82,7 @@ def print_graph(iter):
 			room = cmd.split('-')[1]
 			if room != end_room[0]:
 				node_labels[room] = ''
-	
+
 
 ants = input()
 if ants == 'ERROR':
