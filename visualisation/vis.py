@@ -45,6 +45,8 @@ def read_stdin():
 			room1 = line.split('-')[0]
 			room2 = line.split('-')[1]
 			G.add_edge(room1, room2)
+			edge_widths[(room1, room2)] = 0.5
+			edge_widths[(room2, room1)] = 0.5
 		elif line[0] == 'L':
 			commands.append(line.split())
 
@@ -94,17 +96,18 @@ def print_graph(iter):
 			if room != rooms['end']:
 				node_labels[room] = str(ant)
 				colors[room] = 'blue'
+			if old_room != rooms['start']:
+				node_labels[old_room] = ''
+			edge_widths[(room, old_room)] = 3.0
+			edge_widths[(old_room, room)] = 3.0
 	node_labels[rooms['start']] = 'start (' + str(len(rooms_content[rooms['start']])) + ' ants)'
 	node_labels[rooms['end']] = 'end (' + str(len(rooms_content[rooms['end']])) + ' ants)'
-	nx.draw_networkx_nodes(G, pos, node_color=[colors[x] for x in colors.keys()], alpha=0.5, node_size=300)
-	nx.draw_networkx_edges(G, pos, width=0.5, edge_color='b', alpha=0.5)
-	nx.draw_networkx_labels(G, pos, labels=node_labels)
-	if iter >= 0 and iter < len(commands):
-		for cmd in commands[iter]:
-			ant = cmd.split('-')[0][1:]
-			room = cmd.split('-')[1]
-			if room != rooms['end']:
-				node_labels[room] = ''
+	widths = []
+	for edge in G.edges():
+		widths.append(edge_widths[edge])
+	nx.draw_networkx_nodes(G, pos, node_color=[colors[x] for x in colors.keys()], alpha=0.5, node_size=5000/int(ants))
+	nx.draw_networkx_edges(G, pos, width=widths, edge_color='b', alpha=0.5)
+	nx.draw_networkx_labels(G, pos, labels=node_labels, font_weight='bold')
 
 
 ants = input()
@@ -119,6 +122,7 @@ node_labels = {}
 commands = []
 rooms = {}
 rooms_content = {}
+edge_widths = {}
 read_stdin()
 ant_location = {x:rooms['start'] for x in range(1, int(ants)+1)}
 pos = nx.fruchterman_reingold_layout(G)
