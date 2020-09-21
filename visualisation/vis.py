@@ -4,6 +4,7 @@ import sys
 import networkx as nx
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
+import time
 
 
 def read_stdin():
@@ -75,17 +76,30 @@ def get_point(pt1, pt2, iter):
 	y = (pt1[1] + l*pt2[1])/(1 + l)
 	return [x, y]
 
-def ants_movement(iter, commands):
-	x = []
-	y = []
+
+
+def print_ants_movement(commands):
+	edges = []
 	for cmd in commands:
-		pass
+		ant = int(cmd.split('-')[0][1:])
+		room = cmd.split('-')[1]
+		old_room = ant_location[ant]
+		edges.append((pos[old_room], pos[room]))
+	for i in range(1, 25):
+		pts = []
+		for rooms in edges:
+			pts.append(get_point(rooms[0], rooms[1], i))
+		scat = plt.scatter([x[0] for x in pts], [x[1] for x in pts], c='r')
+		time.sleep(0.04)
+
+	
 
 
 def print_graph(iter):
 	ax.clear()
 	iter -= 1
 	if iter >= 0 and iter < len(commands):
+		print_ants_movement(commands[iter])
 		for cmd in commands[iter]:
 			ant = int(cmd.split('-')[0][1:])
 			room = cmd.split('-')[1]
@@ -126,5 +140,5 @@ edge_widths = {}
 read_stdin()
 ant_location = {x:rooms['start'] for x in range(1, int(ants)+1)}
 pos = nx.fruchterman_reingold_layout(G)
-anim = animation.FuncAnimation(fig, print_graph, frames=len(commands)+2, interval=1000, repeat=False)
+anim = animation.FuncAnimation(fig, print_graph, frames=len(commands)+2, interval=1, repeat=False)
 plt.show()
