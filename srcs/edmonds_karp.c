@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   edmonds_karp.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:15:14 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/16 16:48:02 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/21 20:51:55 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static void	malloc_all(t_lemin *lemin)
+static void	malloc_all(t_lemin *lemin, int d_flag)
 {
 	lemin->path = NULL;
 	if (!(lemin->used = (int*)malloc(sizeof(int) * lemin->vertices)) ||
 		!(lemin->parent = (int*)malloc(sizeof(int) * lemin->vertices)) ||
 		!(lemin->path_len = (int*)malloc(sizeof(int) * lemin->vertices)))
-		error_exit();
+		error_exit(d_flag, "Failed to allocate memory for lemin structure");
 	lemin->max_path_len = lemin->vertices + lemin->ants;
 }
 
@@ -56,29 +56,29 @@ static void	delete_vericies(t_lemin *lemin)
 	}
 }
 
-static int	find_path(t_lemin *lemin)
+static int	find_path(t_lemin *lemin, int d_flag)
 {
 	bfs(lemin);
 	if (!lemin->used[lemin->end] ||
 		lemin->max_path_len - lemin->path_len[lemin->end] < 2)
 		return (0);
-	refresh_paths(lemin);
+	refresh_paths(lemin, d_flag);
 	return (1);
 }
 
-void		edmonds_karp(t_lemin *lemin)
+void		edmonds_karp(t_lemin *lemin, int d_flag)
 {
 	if (is_neighbor(lemin, lemin->start, lemin->end))
 		start_and_finish_are_connected(lemin);
-	malloc_all(lemin);
+	malloc_all(lemin, d_flag);
 	reset_arrays_for_bfs(lemin);
 	lemin->num_of_paths = 0;
-	while (find_path(lemin))
+	while (find_path(lemin, d_flag))
 	{
 		delete_vericies(lemin);
 		reset_arrays_for_bfs(lemin);
 	}
 	if (!lemin->path)
-		error_exit();
+		error_exit(d_flag, "No possible paths found");
 	print_output(lemin);
 }

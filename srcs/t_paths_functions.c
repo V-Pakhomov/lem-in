@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   t_paths_functions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:20:42 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/16 16:45:17 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/21 21:02:57 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static t_path	*new_path(t_lemin *lemin)
+static t_path	*new_path(t_lemin *lemin, int d_flag)
 {
 	t_path	*new;
 	int		i;
@@ -21,9 +21,9 @@ static t_path	*new_path(t_lemin *lemin)
 
 	len = lemin->path_len[lemin->end];
 	if (!(new = (t_path*)malloc(sizeof(t_path))))
-		error_exit();
+		error_exit(d_flag, "Failed to allocate memory for new path");
 	if (!(new->path = (int*)malloc(sizeof(int) * len)))
-		error_exit();
+		error_exit(d_flag, "Failed to allocate memory for path");
 	new->ants = 0;
 	new->len = len;
 	new->next = NULL;
@@ -99,8 +99,8 @@ static void		push_path(t_lemin *lemin, t_path *new)
 	set_ants_to_paths(lemin, new->len);
 }
 
-void			refresh_paths(t_lemin *lemin)
+void			refresh_paths(t_lemin *lemin, int d_flag)
 {
 	lemin->num_of_paths++;
-	push_path(lemin, new_path(lemin));
+	push_path(lemin, new_path(lemin, d_flag));
 }

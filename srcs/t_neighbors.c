@@ -3,32 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   t_neighbors.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/10 13:20:51 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/16 18:34:58 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/21 21:02:29 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static t_neighbor	*new_neighbor(int n)
+static t_neighbor	*new_neighbor(int n, int d_flag)
 {
 	t_neighbor *new;
 
 	if (!(new = (t_neighbor*)malloc(sizeof(t_neighbor))))
-		error_exit();
+		error_exit(d_flag, "Failed to allocate neighbours structure");
 	new->room = n;
 	new->next = NULL;
 	return (new);
 }
 
-void				add_neighbor(t_neighbor **neighbor, int n)
+void				add_neighbor(t_neighbor **neighbor, int n, int d_flag)
 {
 	t_neighbor *new;
 	t_neighbor *tmp;
 
-	new = new_neighbor(n);
+	new = new_neighbor(n, d_flag);
 	if (*neighbor == NULL)
 	{
 		*neighbor = new;

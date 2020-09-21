@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/20 22:44:41 by admin            ###   ########.fr       */
+/*   Updated: 2020/09/21 20:50:37 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,12 @@ int				room_num(t_lemin *lemin, char *key);
 /*
 ** 	error.c
 */
-void			error_exit(void);
+void			error_exit(int d_flag, char *s);
 
 /*
 ** t_path_functions.c
 */
-void			refresh_paths(t_lemin *lemin);
+void			refresh_paths(t_lemin *lemin, int d_flag);
 
 /*
 ** bfs.c
@@ -106,7 +106,7 @@ void			bfs(t_lemin *lemin);
 /*
 ** edmonds_karp.c
 */
-void			edmonds_karp(t_lemin *lemin);
+void			edmonds_karp(t_lemin *lemin, int d_flag);
 
 /*
 ** file_to_debug.c
@@ -127,7 +127,7 @@ void			prnt_lst_rooms(t_room *rooms);
 /*
 ** t_neighbors.c
 */
-void			add_neighbor(t_neighbor **neighbor, int n);
+void			add_neighbor(t_neighbor **neighbor, int n, int flag_d);
 void			delete_neighbor(t_neighbor **neighbor, int n);
 int				is_neighbor(t_lemin *lemin, int n, int m);
 
@@ -135,7 +135,7 @@ int				is_neighbor(t_lemin *lemin, int n, int m);
 ** validation and input parsing
 ** TO DO: refactor and sort
 */
-void			intialize_adjacency_list(t_lemin *lemin);
+void			intialize_adjacency_list(t_lemin *lemin, int d_flag);
 void			add_room(t_room **all_lst, char *name, int cmd_flag);
 void			add_link(t_link **all_lst, char *first, char *last);
 void			add_input(t_input **all_input, char *line);
@@ -144,18 +144,18 @@ int				is_comment(char *s);
 int				is_cmd(char *s);
 int				is_room(char *s);
 int				is_link(char *s);
-void			parse_input(t_lemin *lemin);
+void			parse_input(t_lemin *lemin, int d_flag);
 
 void			print_matrix(int **m, int size);
 void			print_links(t_link *links);
 void			print_lst_of_rooms(char **rooms);
 
-void			init_room_names_dict(t_lemin *lemin);
-int				check_dup_elem(char *line, t_room *rooms);
+void			init_room_names_dict(t_lemin *lemin, int d_flag);
+int				check_dup_elem(char *line, t_room *rooms, int d_flag);
 
-t_lemin			*lemin_init();
-void			check_links(t_lemin *lemin);
-void			check_repeating_rooms(t_lemin *lemin);
+t_lemin			*lemin_init(int d_flag);
+void			check_links(t_lemin *lemin, int d_flag);
+void			check_repeating_rooms(t_lemin *lemin, int d_flag);
 void			p_input(t_input *in);
 
 #endif

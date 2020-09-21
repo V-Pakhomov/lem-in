@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
+/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:17:38 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/02 15:42:22 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/21 20:50:05 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-void	error_exit(void)
+void	error_exit(int d_flag, char *s)
 {
 	ft_printf("ERROR\n");
+	if (d_flag)
+		ft_printf("Reason: %s\n", s);
 	exit(-1);
 }

@@ -6,7 +6,7 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:52:11 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/17 22:25:28 by admin            ###   ########.fr       */
+/*   Updated: 2020/09/21 20:51:06 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		is_link(char *s)
 	return (res);
 }
 
-int		check_dup_elem(char *line, t_room *rooms)
+int		check_dup_elem(char *line, t_room *rooms, int d_flag)
 {
 	t_room	*ptr;
 	char	**room;
@@ -71,7 +71,7 @@ int		check_dup_elem(char *line, t_room *rooms)
 			(ptr->x == ft_atoi(room[1]) && ptr->y == ft_atoi(room[2])))
 		{
 			ft_arrayfree(room);
-			error_exit();
+			error_exit(d_flag, "Duplicated room has been found");
 		}
 		ptr = ptr->next;
 	}

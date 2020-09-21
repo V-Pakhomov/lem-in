@@ -6,30 +6,30 @@
 /*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:11:34 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/20 23:32:49 by admin            ###   ########.fr       */
+/*   Updated: 2020/09/21 21:02:12 by admin            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lemin.h"
 
-static int	handle_line(char *line, t_link **links, t_room **rooms, int *cmd)
+static int	handle_line(char *line, t_lemin *l, int *cmd, int d_flag)
 {
 	char **link;
 
 	if (!line || line[0] == '\0' || line[0] == ' ' || line[0] == 'L')
-		error_exit();
+		error_exit(d_flag, "Wrong line format");
 	if (is_comment(line))
 		return (0);
 	if (is_room(line))
 	{
-		add_room(rooms, line, *cmd);
+		add_room(&l->rooms_raw, line, *cmd);
 		*cmd &= 4;
 		return (1);
 	}
 	if (is_link(line))
 	{
 		link = ft_strsplit(line, '-');
-		add_link(links, link[0], link[1]);
+		add_link(&l->links, link[0], link[1]);
 		ft_arrayfree(link);
 	}
 	else if (ft_strequ("##start", line))
@@ -37,7 +37,7 @@ static int	handle_line(char *line, t_link **links, t_room **rooms, int *cmd)
 	else if (ft_strequ("##end", line))
 		*cmd |= 2;
 	else
-		error_exit();
+		error_exit(d_flag, "Undefined wrong line format");
 	return (0);
 }
 
@@ -57,7 +57,7 @@ t_input		*get_all_input(void)
 	return (input);
 }
 
-void		handle_input(t_input *in, t_lemin *lemin)
+void		handle_input(t_input *in, t_lemin *lemin, int d_flag)
 {
 	t_input	*ptr;
 	int		cmd_flag;
@@ -79,27 +79,30 @@ void		handle_input(t_input *in, t_lemin *lemin)
 		}
 		else
 			lemin->vertices +=
-				handle_line(ptr->line, &links, &rooms, &cmd_flag);
+				handle_line(ptr->line, lemin, &cmd_flag, d_flag);
 		ptr = ptr->prev;
 	}
-	lemin->links = links;
-	lemin->rooms_raw = rooms;
+	// lemin->links = links;
+	// lemin->rooms_raw = rooms;
 }
 
 int			main(int argc, char **argv)
 {
 	t_lemin *lemin;
+	int d_flag;
 
-	if (argc > 1 && argv)
-		error_exit();
-	lemin = lemin_init();
+	if (argc > 1 && ft_strequ(argv[1], "-d"))
+		d_flag = 1;
+	else
+		d_flag = 0;
+	lemin = lemin_init(d_flag);
 	lemin->input_raw = get_all_input();
-	handle_input(lemin->input_raw, lemin);
+	handle_input(lemin->input_raw, lemin, d_flag);
 	if (lemin->ants <= 0 || lemin->vertices == 0 || lemin->links == NULL)
-		error_exit();
-	init_room_names_dict(lemin);
-	check_repeating_rooms(lemin);
-	check_links(lemin);
-	intialize_adjacency_list(lemin);
-	edmonds_karp(lemin);
+		error_exit(d_flag, "Incomplete input error");
+	init_room_names_dict(lemin, d_flag);
+	check_repeating_rooms(lemin, d_flag);
+	check_links(lemin, d_flag);
+	intialize_adjacency_list(lemin, d_flag);
+	edmonds_karp(lemin, d_flag);
 }
