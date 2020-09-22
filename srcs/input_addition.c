@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_addition.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:00:49 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/21 20:36:15 by admin            ###   ########.fr       */
+/*   Updated: 2020/09/22 17:12:49 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,16 @@ void			add_input(t_input **all_input, char *line)
 	*all_input = new;
 }
 
-void p_input(t_input *in)
+void			p_input(t_input *in)
 {
 	t_input	*p;
 
-	p = in;;
-	while(p->next != 0)
+	p = in;
+	while (p->next != 0)
 	{
 		p = p->next;
 	}
-	while(p != 0)
+	while (p != 0)
 	{
 		ft_printf("%s\n", p->line);
 		p = p->prev;

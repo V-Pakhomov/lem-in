@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_validator.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:11:34 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/21 21:02:12 by admin            ###   ########.fr       */
+/*   Updated: 2020/09/22 17:14:15 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,14 +82,12 @@ void		handle_input(t_input *in, t_lemin *lemin, int d_flag)
 				handle_line(ptr->line, lemin, &cmd_flag, d_flag);
 		ptr = ptr->prev;
 	}
-	// lemin->links = links;
-	// lemin->rooms_raw = rooms;
 }
 
 int			main(int argc, char **argv)
 {
-	t_lemin *lemin;
-	int d_flag;
+	t_lemin	*lemin;
+	int		d_flag;
 
 	if (argc > 1 && ft_strequ(argv[1], "-d"))
 		d_flag = 1;

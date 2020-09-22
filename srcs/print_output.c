@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_output.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 16:25:44 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/20 22:44:13 by admin            ###   ########.fr       */
+/*   Updated: 2020/09/22 17:13:44 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void		print_output(t_lemin *lemin)
 	line = 0;
 	while (printable(lemin, line++))
 		ft_printf("\n");
-	//ft_printf("It took %d moves\n", line - 1);
 	exit(0);
 }
 
@@ -88,6 +87,5 @@ void		start_and_finish_are_connected(t_lemin *lemin)
 	i = 1;
 	while (i <= lemin->ants)
 		ft_printf("L%d-%s ", i++, lemin->rooms[lemin->end]);
-	ft_printf("\nIt took 1 move\n");
 	exit(0);
 }

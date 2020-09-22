@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lemin.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/25 15:23:16 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/21 20:50:37 by admin            ###   ########.fr       */
+/*   Updated: 2020/09/22 17:07:24 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,12 @@ typedef struct	s_room
 
 }				t_room;
 
-typedef struct		s_input
+typedef struct	s_input
 {
 	char			*line;
 	struct s_input	*next;
 	struct s_input	*prev;
-}					t_input;
+}				t_input;
 
 typedef struct	s_neighbor
 {

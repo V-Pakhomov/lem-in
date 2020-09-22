@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   extra_checker.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:52:11 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/21 20:54:22 by admin            ###   ########.fr       */
+/*   Updated: 2020/09/22 17:09:02 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ void	check_links(t_lemin *lemin, int d_flag)
 
 void	check_repeating_rooms(t_lemin *lemin, int d_flag)
 {
-	int i;
-	t_room *ptr;
-	t_room *ptr2;
+	int		i;
+	t_room	*ptr;
+	t_room	*ptr2;
 
 	i = 1;
 	ptr = lemin->rooms_raw;
@@ -42,10 +42,10 @@ void	check_repeating_rooms(t_lemin *lemin, int d_flag)
 			error_exit(d_flag, "Found repeating rooms");
 		i++;
 	}
-	while(ptr != 0)
+	while (ptr != 0)
 	{
 		ptr2 = ptr->next;
-		while(ptr2 != 0)
+		while (ptr2 != 0)
 		{
 			if (ptr->x == ptr2->x && ptr->y == ptr2->y)
 				error_exit(d_flag, "Found repeating ccordinates");

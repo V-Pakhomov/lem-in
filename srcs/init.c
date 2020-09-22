@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 16:58:39 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/21 21:03:31 by admin            ###   ########.fr       */
+/*   Updated: 2020/09/22 17:11:40 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void		intialize_adjacency_list(t_lemin *lemin, int d_flag)
 	}
 }
 
-static void	init_start_and_end(t_lemin *lemin, char **start, char **end, int d_flag)
+static void	init_start_and_end(t_lemin *lemin,
+								char **start, char **end, int d_flag)
 {
 	if (*start == NULL || *end == NULL)
 		error_exit(d_flag, "Failed to define start or end node");
@@ -68,13 +69,13 @@ void		init_room_names_dict(t_lemin *lemin, int d_flag)
 	{
 		if ((rooms->is_cmd == 1 && start != NULL) ||
 			(rooms->is_cmd == 2 && end != NULL))
-			error_exit(d_flag, "More than one start or end node has been found");
+			error_exit(d_flag,
+						"More than one start or end node has been found");
 		if (rooms->is_cmd == 1)
 			start = ft_strdup(rooms->name);
 		else if (rooms->is_cmd == 2)
 			end = ft_strdup(rooms->name);
-		lemin->rooms[i] = ft_strdup(rooms->name);
-		i++;
+		lemin->rooms[i++] = ft_strdup(rooms->name);
 		rooms = rooms->next;
 	}
 	init_start_and_end(lemin, &start, &end, d_flag);
@@ -85,7 +86,8 @@ t_lemin		*lemin_init(int d_flag)
 	t_lemin *out;
 
 	if (!(out = (t_lemin *)malloc(sizeof(t_lemin))))
-		error_exit(d_flag, "Failed to allocate memory for lemin global structure");
+		error_exit(d_flag,
+					"Failed to allocate memory for lemin global structure");
 	out->links = 0;
 	out->max_path_len = 0;
 	out->num_of_paths = 0;

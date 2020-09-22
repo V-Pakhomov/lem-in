@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   addition_rooms_and_links.c                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:00:49 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/21 20:34:24 by admin            ###   ########.fr       */
+/*   Updated: 2020/09/22 17:09:09 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,3 @@ void			add_room(t_room **all_lst, char *name, int cmd_flag)
 		*all_lst = new_room(room, cmd_flag);
 	ft_arrayfree(room);
 }
-
