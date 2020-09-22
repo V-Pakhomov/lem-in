@@ -70,36 +70,12 @@ def is_link(line):
 	return len(line.split('-')) == 2
 
 
-def get_point(pt1, pt2, iter):
-	l = iter/(25-iter)
-	x = (pt1[0] + l*pt2[0])/(1 + l)
-	y = (pt1[1] + l*pt2[1])/(1 + l)
-	return [x, y]
-
-
-
-def print_ants_movement(commands):
-	edges = []
-	for cmd in commands:
-		ant = int(cmd.split('-')[0][1:])
-		room = cmd.split('-')[1]
-		old_room = ant_location[ant]
-		edges.append((pos[old_room], pos[room]))
-	for i in range(1, 25):
-		pts = []
-		for rooms in edges:
-			pts.append(get_point(rooms[0], rooms[1], i))
-		scat = plt.scatter([x[0] for x in pts], [x[1] for x in pts], c='r')
-		time.sleep(0.04)
-
-	
-
-
 def print_graph(iter):
 	ax.clear()
 	iter -= 1
 	if iter >= 0 and iter < len(commands):
-		print_ants_movement(commands[iter])
+		if debug:
+			plt.waitforbuttonpress()
 		for cmd in commands[iter]:
 			ant = int(cmd.split('-')[0][1:])
 			room = cmd.split('-')[1]
@@ -119,7 +95,7 @@ def print_graph(iter):
 	widths = []
 	for edge in G.edges():
 		widths.append(edge_widths[edge])
-	nx.draw_networkx_nodes(G, pos, node_color=[colors[x] for x in colors.keys()], alpha=0.5, node_size=5000/int(ants))
+	nx.draw_networkx_nodes(G, pos, node_color=[colors[x] for x in colors.keys()], alpha=0.5, node_size=nodesize)
 	nx.draw_networkx_edges(G, pos, width=widths, edge_color='b', alpha=0.5)
 	nx.draw_networkx_labels(G, pos, labels=node_labels, font_weight='bold')
 
@@ -128,6 +104,7 @@ ants = input()
 if ants == 'ERROR':
 	print(ants)
 	exit(1)
+debug = len(sys.argv) == 2
 fig, ax = plt.subplots(figsize=(20,12))
 plt.axis('off')
 G = nx.Graph()
@@ -138,7 +115,8 @@ rooms = {}
 rooms_content = {}
 edge_widths = {}
 read_stdin()
+nodesize = 50000 / len(G.nodes())
 ant_location = {x:rooms['start'] for x in range(1, int(ants)+1)}
 pos = nx.fruchterman_reingold_layout(G)
-anim = animation.FuncAnimation(fig, print_graph, frames=len(commands)+2, interval=1, repeat=False)
+anim = animation.FuncAnimation(fig, print_graph, frames=len(commands)+2, interval=999*(not debug) + 1, repeat=False)
 plt.show()
