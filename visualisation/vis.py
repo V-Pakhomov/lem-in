@@ -118,5 +118,5 @@ read_stdin()
 nodesize = 50000 / len(G.nodes())
 ant_location = {x:rooms['start'] for x in range(1, int(ants)+1)}
 pos = nx.fruchterman_reingold_layout(G)
-anim = animation.FuncAnimation(fig, print_graph, frames=len(commands)+2, interval=999*(not debug) + 1, repeat=False)
+anim = animation.FuncAnimation(fig, print_graph, frames=len(commands)+2, interval=1 if debug else 1000, repeat=False)
 plt.show()
