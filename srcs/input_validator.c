@@ -61,11 +61,9 @@ void		handle_input(t_input *in, t_lemin *lemin, int d_flag)
 {
 	t_input	*ptr;
 	int		cmd_flag;
-	t_room	*rooms;
 
 	ptr = in;
 	cmd_flag = 0;
-	rooms = 0;
 	while (ptr->next != 0)
 		ptr = ptr->next;
 	while (ptr != 0)
