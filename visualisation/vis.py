@@ -4,7 +4,6 @@ import sys
 import networkx as nx
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
-import time
 
 
 def read_stdin():
@@ -57,10 +56,10 @@ def is_room(line):
 	if len(line) != 3:
 		return False
 	try:
-		x = int(line[1])
-		y = int(line[2])
+		int(line[1])
+		int(line[2])
 		return True
-	except Exception:
+	except ValueError:
 		return False
 
 
@@ -90,8 +89,8 @@ def print_graph(iter):
 				node_labels[old_room] = ''
 			edge_widths[(room, old_room)] = 3.0
 			edge_widths[(old_room, room)] = 3.0
-	node_labels[rooms['start']] = 'start (' + str(len(rooms_content[rooms['start']])) + ' ants)'
-	node_labels[rooms['end']] = 'end (' + str(len(rooms_content[rooms['end']])) + ' ants)'
+	node_labels[rooms['start']] = f"start ({len(rooms_content[rooms['start']])} ants)"
+	node_labels[rooms['end']] = f"end ({len(rooms_content[rooms['end']])} ants)"
 	widths = []
 	for edge in G.edges():
 		widths.append(edge_widths[edge])
@@ -101,7 +100,9 @@ def print_graph(iter):
 
 
 ants = input()
-if ants == 'ERROR':
+try:
+	ants = int(ants)
+except ValueError:
 	print(ants)
 	exit(1)
 debug = len(sys.argv) == 2

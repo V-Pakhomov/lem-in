@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/16 17:11:34 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/22 17:14:15 by rciera           ###   ########.fr       */
+/*   Updated: 2020/09/25 20:57:15 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,10 @@ void		handle_input(t_input *in, t_lemin *lemin, int d_flag)
 	t_input	*ptr;
 	int		cmd_flag;
 	t_room	*rooms;
-	t_link	*links;
 
 	ptr = in;
 	cmd_flag = 0;
 	rooms = 0;
-	links = 0;
 	while (ptr->next != 0)
 		ptr = ptr->next;
 	while (ptr != 0)
