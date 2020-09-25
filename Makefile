@@ -37,7 +37,6 @@ SOURCES = input_validator.c \
 		error.c \
 		print_output.c \
 		t_neighbors.c \
-		file_to_debug.c \
 		extra_checker.c \
 		input_addition.c
 
