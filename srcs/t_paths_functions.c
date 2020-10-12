@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_paths_functions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: admin <admin@student.42.fr>                +#+  +:+       +#+        */
+/*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/26 14:20:42 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/21 21:02:57 by admin            ###   ########.fr       */
+/*   Updated: 2020/10/12 19:27:33 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ static void		push_path(t_lemin *lemin, t_path *new)
 		lemin->path = new;
 		lemin->path->ants = lemin->ants;
 		lemin->path->first_ant = 1;
+		set_ants_to_paths(lemin, new->len);
 		return ;
 	}
 	tmp = lemin->path;
