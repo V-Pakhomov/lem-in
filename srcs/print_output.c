@@ -6,7 +6,7 @@
 /*   By: rciera <rciera@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/28 16:25:44 by rciera            #+#    #+#             */
-/*   Updated: 2020/09/22 17:13:44 by rciera           ###   ########.fr       */
+/*   Updated: 2020/10/14 17:30:16 by rciera           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ void		start_and_finish_are_connected(t_lemin *lemin)
 	i = 1;
 	while (i <= lemin->ants)
 		ft_printf("L%d-%s ", i++, lemin->rooms[lemin->end]);
+	ft_putendl("");
 	exit(0);
 }

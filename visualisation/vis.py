@@ -99,13 +99,16 @@ def print_graph(iter):
 	nx.draw_networkx_labels(G, pos, labels=node_labels, font_weight='bold')
 
 
+debug = len(sys.argv) == 2
 ants = input()
 try:
 	ants = int(ants)
 except ValueError:
 	print(ants)
+	if debug:
+		reason = input()
+		print(reason)
 	exit(1)
-debug = len(sys.argv) == 2
 fig, ax = plt.subplots(figsize=(20,12))
 plt.axis('off')
 G = nx.Graph()
