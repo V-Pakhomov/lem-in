@@ -96,7 +96,9 @@ def print_graph(iter):
 		widths.append(edge_widths[edge])
 	nx.draw_networkx_nodes(G, pos, node_color=[colors[x] for x in colors.keys()], alpha=0.5, node_size=nodesize)
 	nx.draw_networkx_edges(G, pos, width=widths, edge_color='b', alpha=0.5)
-	nx.draw_networkx_labels(G, pos, labels=node_labels, font_weight='bold')
+	nx.draw_networkx_labels(G, pos, labels=node_labels, font_weight='bold', font_color='yellow')
+	ax.set_facecolor('black')
+	fig.set_facecolor('black')
 
 
 debug = len(sys.argv) == 2
@@ -111,6 +113,7 @@ except ValueError:
 	exit(1)
 fig, ax = plt.subplots(figsize=(20,12))
 plt.axis('off')
+fig.set_facecolor('black')
 G = nx.Graph()
 colors = {}
 node_labels = {}
